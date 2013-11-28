@@ -13,7 +13,7 @@
 
 		$result = $stmt->fetchAll();
 
-		//the picture element looks as follows: <!ELEMENT picture(picuser, picurl, pictime, comment*, description)>
+		//the picture element looks as follows: ELEMENT picture(picuser, picurl, pictime, comment*, description)
 		foreach($result as $r)
 		{
 			$picUser = $r['userName'];
@@ -37,7 +37,7 @@
 			$stmt2->execute(array('PID' => $picID));
 			$result2 = $stmt2->fetchAll();
 
-			//The comment element looks like: <!ELEMENT comment (commenttime, commentuser, commenttext)>
+			//The comment element looks like: ELEMENT comment (commenttime, commentuser, commenttext)
 			foreach($result2 as $r2)
 			{
 				$commentText = $r2['text'];
