@@ -8,15 +8,14 @@
 			<body>
 				<header>
 					<div id = "headerContent">
-						<a href = "index.xml" id = "heading"><h1>LiU-Gram, ser fult ut just nu, Design kommer!</h1></a>
+						<a href = "index.php" id = "heading"><h1>LiU-Gram</h1></a>
 						<a id = "signinlink" href = '#'>Sign in!</a>
-
 					</div>
 
 				</header>
 
 				<div id = "pagewrapper">
-					<p> This is the wrapper </p>
+					<h2> Picture Feed </h2>
 					<div id = "mainFeed">
 						<xsl:apply-templates />
 					</div> 
@@ -29,8 +28,8 @@
 
 	<xsl:template match = "picture">
 		<div class = "photoFrame">
-			<img height = "120" src = "{picurl}" alt = "test"/>
-			<p>Uploaded by: <xsl:value-of select = "picuser"/></p>
+			<a href = 'viewImage.php?pictureID={picid}'><img height = "120" src = "{picurl}" alt = "test"/></a>
+			<p>Uploaded by: <a class = "userlink" href="#"><xsl:value-of select = "picuser"/></a></p>
 			<p class = "pictime"><xsl:value-of select = "pictime"/></p> 
 		</div>
 	</xsl:template>
