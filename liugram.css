@@ -67,3 +67,14 @@ header
 	border: 2px solid #006655;
 	display: inline-block;
 }
+
+.pictime
+{
+	font-style: italic;
+}
+
+#signinlink
+{
+	display: inline-block;
+	margin-left: 50px;
+}

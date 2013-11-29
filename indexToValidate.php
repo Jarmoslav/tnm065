@@ -1,5 +1,7 @@
-<?php 	  
-	  //header("Content-type:text/xml;charset=utf-8");
+
+<?php 
+	  
+	  header("Content-type:text/xml;charset=utf-8");
 	  echo '<?xml version="1.0" standalone="no"?>';
 	  echo '<!DOCTYPE liugram SYSTEM "http://www.student.itn.liu.se/~johho982/TNM065/ProjektGrejer/liugram.dtd">';
 	  include 'prefix.php';
@@ -21,7 +23,7 @@
 
     //To start with we have only one stylesheet:
 
-       echo '<?xml-stylesheet type="text/xsl" href="index.xsl"?>';
+       /*echo '<?xml-stylesheet type="text/xsl" href="index.xsl"?>';*/
 ?>
 
 <liugram>
@@ -81,4 +83,4 @@
 		}
 	?>
 </liugram>
-<?php include 'postfix.php';?>
+<?php //include 'postfix.php';?>
