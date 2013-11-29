@@ -1,0 +1,69 @@
+html, body, div, span, object, 
+iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
+ pre, abbr, address, cite, code, del, dfn, em, img,
+ ins, kbd, q, samp, small, strong, sub, sup, var, b,
+ i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend,
+ table, caption, tbody, tfoot, thead, tr, th, td, article,
+ aside, figure, footer, header,  hgroup, menu, nav, section, menu, time,
+ mark, audio, video 
+{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:
+	baseline;background:transparent;}
+
+
+/* Main Components */
+
+body
+{
+	background-color: white;
+}
+
+header
+{
+	height: 110px;
+	border: 2px solid black;
+}
+
+#headerContent
+{
+	width: 800px;
+	margin: 0 auto;
+}
+
+#heading
+{
+	color: #006699;
+	text-decoration: none;
+	display: inline-block;
+
+	font-size: 1.6em;
+
+	-o-transition:.7s;
+  	-ms-transition:.7s;
+  	-moz-transition:.7s;
+  	-webkit-transition:.7s;
+  	/* ...and now for the proper property */
+  	transition:.7s;
+}
+
+#heading:hover
+{
+	color: #FF6600;
+}
+
+#pagewrapper 
+{
+	margin: 0 auto;
+	width: 800px;
+	border: 2px solid black;
+}
+
+#mainFeed
+{
+	padding: 20px;
+}
+
+.photoFrame
+{
+	border: 2px solid #006655;
+	display: inline-block;
+}

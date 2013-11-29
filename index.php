@@ -1,7 +1,28 @@
-<!DOCTYPE root SYSTEM "http://www.student.itn.liu.se/~johho982/TNM065/ProjektGrejer/liugram.dtd">
-<?php header("Content-type:text/xml;charset=utf-8");?>
 
+<?php 
+	  include 'prefix.php';
+	  header("Content-type:text/xml;charset=utf-8");
+	  echo '<?xml version="1.0"?>';
+?>
 
+<?php 
+	//This is the indexfile. It will have two different stylesheets. One for when you are logged in and one when you're not. 
+	// Something like this: 
+	/*if(loggedin()){
+                echo '<?xml-stylesheet type="text/xsl" href="loggedin/index_loggedin.xsl"?>';
+                echo "<start_page_tutorials>";        
+                $username = $_SESSION['username'];
+                echo "<username>$username</username>";
+        }
+        else{
+                echo '<?xml-stylesheet type="text/xsl" href="index.xsl"?>';
+                echo "<start_page_tutorials>";
+        }*/
+
+    //To start with we have only one stylesheet:
+
+       echo '<?xml-stylesheet type="text/xsl" href="index.xsl"?>';
+?>
 
 <root>
 	<?php
@@ -56,8 +77,8 @@
 			echo "<description>
 					$description
 				  </description>";
-
 			echo "</picture>";
 		}
 	?>
 </root>
+<?php include 'postfix.php';?>
