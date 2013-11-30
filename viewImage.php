@@ -3,42 +3,24 @@
 	  echo '<?xml version="1.0" standalone="no"?>';
 	  echo '<!DOCTYPE liugram SYSTEM "http://www.student.itn.liu.se/~johho982/TNM065/ProjektGrejer/liugram.dtd">';
 	  include 'prefix.php';
+
+	  //xsl-stylesheet
+	  echo '<?xml-stylesheet type="text/xsl" href="viewImage.xsl"?>';
 ?>
-
-<?php 
-	//This is the indexfile. It will have two different stylesheets. One for when you are logged in and one when you're not. 
-	// Something like this: 
-	
-	/*if(loggedin()){
-                echo '<?xml-stylesheet type="text/xsl" href="loggedin/index_loggedin.xsl"?>';
-                echo "<start_page_tutorials>";        
-                $username = $_SESSION['username'];
-                echo "<username>$username</username>";
-        }
-        else{
-                echo '<?xml-stylesheet type="text/xsl" href="index.xsl"?>';
-                echo "<start_page_tutorials>";
-        }*/
-
-    //To start with we have only one stylesheet:
-
-       echo '<?xml-stylesheet type="text/xsl" href="index.xsl"?>';
-?>
-
 <liugram>
-	<?php
-		include "dbconnect.inc.php";
+<?php
+	$picID = $_GET['pictureID'];
 
-		//PDO-statement for fetching from database
-		$stmt = $dbh->prepare('SELECT * FROM picture ORDER BY time DESC');
-		$stmt->execute();
+	include "dbconnect.inc.php";
 
-		$result = $stmt->fetchAll();
+	$stmt = $dbh->prepare('SELECT * FROM picture WHERE pictureID = :chosenPictureID ORDER BY time DESC');
+	$stmt->execute(array('chosenPictureID' => $picID));
 
-		//the picture element looks as follows: ELEMENT picture(picuser, picurl, pictime, picid, comment*, description)
-		foreach($result as $r)
-		{
-			$picUser = $r['userName'];
+	$result = $stmt->fetchAll();
+
+	foreach ($result as $r) 
+	{
+		$picUser = $r['userName'];
 			$picURL = $r['picURL'];
 			$picTime = $r['time'];
 			$picTime = strtotime($picTime);
@@ -80,7 +62,7 @@
 					$description
 				  </description>";
 			echo "</picture>";
-		}
-	?>
+	}
+?>
 </liugram>
-<?php include 'postfix.php';?>
+<?php include "viewImagePostfix.php"?>
