@@ -8,7 +8,7 @@
 <liugram>
 <?php 
 	session_start(); 
-	if($_SESSION['loggedin'] == true)//) && $SESSION['user'] != "")
+	if($_SESSION['loggedin'] == true && $_SESSION['user'] != "")
 	{
 		$userName = $_SESSION['user'];
 		echo '<?xml-stylesheet type="text/xsl" href="index_loggedin.xsl"?>';
@@ -82,7 +82,7 @@
 	?>
 </liugram>
 <?php 
-	if($_SESSION['loggedin'] == true)
+	if($_SESSION['loggedin'] == true && $_SESSION['user'] != "")
 	{
 		include 'postfixindexloggedin.php';
 	}

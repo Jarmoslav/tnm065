@@ -42,16 +42,6 @@
 			<xsl:apply-templates select = "comment"/>
 		</div>
 
-		<div id = "addcomment">
-							<p>Write new comment!</p>
-
-							<form action = "addNewComment.php?pictureID={picid}" method = "post">
-								<ul id = "commentlist">
-									<li><textarea name = "newcomment" cols = "55" rows = "10">Write new comment...</textarea></li>
-									<li><input class = "button" name = "publishComment" type = "submit" value = "Add Comment"/></li>
-								</ul>
-							</form>
-						</div>
 	</xsl:template>
 
 	<xsl:template match = "comment">

@@ -10,7 +10,7 @@
 					<div id = "headerContent">
 						<a href = "index.php" id = "heading"><h1>LiU-Gram</h1></a>
 						<a id = "signoutlink" href = 'logout.php'>Sign out!</a>
-						<p>Logged in as <xsl:value-of select = "username"/>
+						<p>Logged in as <xsl:value-of select = "username"/></p>
 					</div>
 
 				</header>
@@ -44,15 +44,15 @@
 		</div>
 
 		<div id = "addcomment">
-							<p>Write new comment!</p>
+			<p>Write new comment!</p>
 
-							<form action = "addNewComment.php?pictureID={picid}" method = "post">
-								<ul id = "commentlist">
-									<li><textarea name = "newcomment" cols = "55" rows = "10">Write new comment...</textarea></li>
-									<li><input class = "button" name = "publishComment" type = "submit" value = "Add Comment"/></li>
-								</ul>
-							</form>
-						</div>
+				<form action = "addNewComment.php?pictureID={picid}" method = "post">
+					<ul id = "commentlist">
+						<li><textarea name = "newcomment" cols = "55" rows = "10">Write new comment...</textarea></li>
+							<li><input class = "button" name = "publishComment" type = "submit" value = "Add Comment"/></li>
+					</ul>
+				</form>
+		</div>
 	</xsl:template>
 
 	<xsl:template match = "comment">

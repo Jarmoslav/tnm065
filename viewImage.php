@@ -5,9 +5,21 @@
 	  include 'prefix.php';
 
 	  //xsl-stylesheet
-	  echo '<?xml-stylesheet type="text/xsl" href="viewImage.xsl"?>';
 ?>
 <liugram>
+<?php	
+	session_start(); 
+	if($_SESSION['loggedin'] == true && $_SESSION['user'] != "")
+	{
+		$userName = $_SESSION['user'];
+		echo '<?xml-stylesheet type="text/xsl" href="viewImageloggedin.xsl"?>';
+		echo "<username>$userName</username>";
+	}
+	else
+	{
+		echo '<?xml-stylesheet type="text/xsl" href="viewImage.xsl"?>';
+	}
+?>
 <?php
 	$picID = $_GET['pictureID'];
 
@@ -65,4 +77,14 @@
 	}
 ?>
 </liugram>
-<?php include "viewImagePostfix.php"?>
+<?php
+	if($_SESSION['loggedin'] == true && $_SESSION['user'] != "")
+	{
+		include "viewImagePostfixloggedin.php";
+	}
+	else
+	{
+		include "viewImagePostfix.php";
+	}
+
+?>
