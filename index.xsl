@@ -9,7 +9,7 @@
 				<header>
 					<div id = "headerContent">
 						<a href = "index.xml" id = "heading"><h1>LiU-Gram, ser fult ut just nu, Design kommer!</h1></a>
-						<a id = "signinlink" href = '#'>Sign in!</a>
+						<a id = "signinlink" href = 'login_check.php'>Sign in!</a>
 
 					</div>
 

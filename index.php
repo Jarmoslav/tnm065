@@ -8,6 +8,7 @@
 <?php 
 	//This is the indexfile. It will have two different stylesheets. One for when you are logged in and one when you're not. 
 	// Something like this: 
+	
 	/*if(loggedin()){
                 echo '<?xml-stylesheet type="text/xsl" href="loggedin/index_loggedin.xsl"?>';
                 echo "<start_page_tutorials>";        
