@@ -8,7 +8,7 @@
 			<body>
 				<header>
 					<div id = "headerContent">
-						<a href = "index.xml" id = "heading"><h1>LiU-Gram, ser fult ut just nu, Design kommer!</h1></a>
+						<a href = "index.xml" id = "heading"><h1>LiU-Gram</h1></a>
 						<a id = "signinlink" href = 'login_check.php'>Sign in!</a>
 
 					</div>
@@ -29,8 +29,8 @@
 
 	<xsl:template match = "picture">
 		<div class = "photoFrame">
-			<img height = "120" src = "{picurl}" alt = "test"/>
-			<p>Uploaded by: <xsl:value-of select = "picuser"/></p>
+			<a href = "viewImage.php?pictureID={picid}"><img height = "120" src = "{picurl}" alt = "test"/></a>
+			<a class = "userlink" href = "#"><p>Uploaded by: <xsl:value-of select = "picuser"/></p></a>
 			<p class = "pictime"><xsl:value-of select = "pictime"/></p> 
 		</div>
 	</xsl:template>
