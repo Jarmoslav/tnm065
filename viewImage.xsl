@@ -16,9 +16,22 @@
 
 				<div id = "pagewrapper">
 					<h2> View Image </h2>
+					<a id = "back" href = "index.php">Go back!</a>
 					<div id = "mainFeed">
 						<xsl:apply-templates select = "picture"/>
 						<xsl:apply-templates select = "comment"/>
+
+						<div id = "addcomment">
+							<p>Write new comment!</p>
+
+							<form action = "addNewComment.php?pictureID" method = "post">
+								<ul id = "commentlist">
+									<li><textarea name = "newcomment" cols = "55" rows = "10">Write new comment...</textarea></li>
+									<li><input class = "button" name = "publishComment" type = "submit" value = "Add Comment"/></li>
+								</ul>
+							</form>
+						</div>
+
 					</div> 
 				</div>
 

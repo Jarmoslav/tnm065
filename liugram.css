@@ -168,9 +168,6 @@ header
 	-moz-border-radius: 5px; 
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
-	-moz-border-radius: 5px; 
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
 	margin: 5px;
 }
 
@@ -195,4 +192,74 @@ header
 #comments h3
 {
 	font-size: 1.5em;
+}
+
+#back
+{
+	display: inline-block;
+	margin: 10px;
+	padding: 10px;
+	text-decoration: none;
+	background-color: #006699;
+	border-radius: 5px;
+	color: white;
+	-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px;
+	-moz-box-shadow: 0px 2px 5px #333;
+	-webkit-box-shadow: 0px 2px 5px #333;
+	box-shadow: 0px 2px 5px #333;
+}
+
+#back:hover
+{
+	background-color: #99CCFF;
+	-o-transition:.7s;
+  	-ms-transition:.7s;
+  	-moz-transition:.7s;
+  	-webkit-transition:.7s;
+  	/* ...and now for the proper property */
+  	transition:.7s;
+}
+
+#addcomment
+{
+	text-align: center;
+}
+
+#commentlist
+{
+	list-style: none;
+}
+
+.button
+{
+	border: none;
+	background: #66cc33 url("miscimg/alert-overlay.png") repeat-x;
+	display: inline-block;
+	color: #fff;
+	text-decoration: none;
+	font-weight: bold;
+	line-height: 1;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+	-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+	text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+	border-bottom: 1px solid rgba(0,0,0,0.25);
+	position: relative;
+	cursor: pointer;
+	font-size: 22px;
+	padding: 8px 14px 9px;
+}
+
+textarea
+{
+	font-family: "Trebuchet MS", Helvetica, sans-serif;	
+	/*border: none;*/
+	-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	-moz-box-shadow: 0px 2px 5px #333;
+	-webkit-box-shadow: 0px 2px 5px #333;
+	box-shadow: 0px 2px 5px #333;
 }
