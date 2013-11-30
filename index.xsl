@@ -9,7 +9,7 @@
 				<header>
 					<div id = "headerContent">
 						<a href = "index.php" id = "heading"><h1>LiU-Gram</h1></a>
-						<a id = "signinlink" href = 'login_check.php'>Sign in!</a>
+						<a id = "signinlink" href = 'login.php'>Sign in!</a>
 					</div>
 
 				</header>

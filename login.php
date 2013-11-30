@@ -1,41 +1,49 @@
 <?php
 
-/*
- * The Prepared Statement for login
- * 
- */
-$username = $_POST[ 'username' ];
-$password = $_POST[ 'password' ];
-  
-echo $username;
-echo $password;
-
-$password = md5( $password );  
-echo $password;
-$usernameDB = 'root';
-$passwordDB ='root';
-
-try {
+	//session för att kolla att  man bara kan komma åt sidan då man är inloggad
 	
-    $db = new PDO('mysql:host=localhost;dbname=tnm065', $usernameDB, $passwordDB);
-	$sql = "SELECT * FROM user WHERE userName=:username AND password=:password";
-	$query = $db->prepare($sql);
-	$query->execute(array('username'=> $username, 'password'=> $password));
-	$results = $query->fetchAll(); 
-
-	//checks if user exists in db
-	if ($query->rowCount() > 0) {
-		echo "valid user";
-		session_start();
-	    $_SESSION['username'] = $username;
+	session_start();
+	
+	if($_SESSION['loggedin']==true && $_SESSION['user']!="")
+	{
+		header("Location: index.php");
 	}
-	else{
-		echo "no user with that name exits or password exists";
-	}
-	
-	
-} catch(PDOException $e) {
-		    echo 'ERROR: ' . $e->getMessage();
-}
 
+	//include('dbconnect.inc.php');
 ?>
+
+<html>
+	<head>
+		<title>LiU-Gram</title>
+		<link rel="stylesheet" type="text/css" media="screen" href="liugram.css"/>
+	</head>
+	<body>
+		<header>
+			<div id = "headerContent">
+				<a href = "index.php" id = "heading"><h1>LiU-Gram</h1></a>
+			</div>
+		</header>
+
+<div id ="pagewrapper">
+	<h2> Sign in! </h2>
+	<form name = "loginform" method = "post" action = "login_check.php">
+		<ul id = "commentlist">
+			<li><label> UserName: <input type="text" name= "username"/></label></li>
+			<li><label> Password: <input type="password" name= "password"/></label></li>
+			<li><input class = "button" type = "submit" name = "submit" value = "Sign in!"/></li>
+		</ul>
+	</form>
+
+	
+
+	<?php
+		if($_SESSION['loggedin']=="noSuchUser")
+		{
+			echo "Wrong username or password!";
+		}
+	?>
+	
+<div id ="pagewrapper">
+
+	</body>
+</html>

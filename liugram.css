@@ -136,6 +136,33 @@ header
 	box-shadow: 0px 2px 5px #333;
 }
 
+#signoutlink
+{
+	padding: 10px;
+	display: inline-block;
+	margin-left: 475px;
+	text-decoration: none;
+	background-color: #CC3333;
+	border-radius: 5px;
+	color: white;
+	-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px;
+	-moz-box-shadow: 0px 2px 5px #333;
+	-webkit-box-shadow: 0px 2px 5px #333;
+	box-shadow: 0px 2px 5px #333;
+}
+
+#signoutlink:hover
+{
+	background-color: #99CCFF;
+	-o-transition:.7s;
+  	-ms-transition:.7s;
+  	-moz-transition:.7s;
+  	-webkit-transition:.7s;
+  	/* ...and now for the proper property */
+  	transition:.7s;
+}
+
 #signinlink:hover
 {
 	background-color: #99CCFF;

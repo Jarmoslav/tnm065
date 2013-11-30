@@ -1,33 +1,31 @@
-<?php 	  
+<?php 	 
+	  
 	  //header("Content-type:text/xml;charset=utf-8");
 	  echo '<?xml version="1.0" standalone="no"?>';
 	  echo '<!DOCTYPE liugram SYSTEM "http://www.student.itn.liu.se/~johho982/TNM065/ProjektGrejer/liugram.dtd">';
 	  include 'prefix.php';
 ?>
-
+<liugram>
 <?php 
-	//This is the indexfile. It will have two different stylesheets. One for when you are logged in and one when you're not. 
-	// Something like this: 
-	
-	/*if(loggedin()){
-                echo '<?xml-stylesheet type="text/xsl" href="loggedin/index_loggedin.xsl"?>';
-                echo "<start_page_tutorials>";        
-                $username = $_SESSION['username'];
-                echo "<username>$username</username>";
-        }
-        else{
-                echo '<?xml-stylesheet type="text/xsl" href="index.xsl"?>';
-                echo "<start_page_tutorials>";
-        }*/
-
-    //To start with we have only one stylesheet:
-
-       echo '<?xml-stylesheet type="text/xsl" href="index.xsl"?>';
+	session_start(); 
+	if($_SESSION['loggedin'] == true)//) && $SESSION['user'] != "")
+	{
+		$userName = $_SESSION['user'];
+		echo '<?xml-stylesheet type="text/xsl" href="index_loggedin.xsl"?>';
+		echo "<username>$userName</username>";
+	}
+	else
+	{
+		echo '<?xml-stylesheet type="text/xsl" href="index.xsl"?>';
+	}
+    
 ?>
 
-<liugram>
+
 	<?php
 		include "dbconnect.inc.php";
+
+		//liugram tag must include <username> </username>
 
 		//PDO-statement for fetching from database
 		$stmt = $dbh->prepare('SELECT * FROM picture ORDER BY time DESC');
@@ -83,4 +81,13 @@
 		}
 	?>
 </liugram>
-<?php include 'postfix.php';?>
+<?php 
+	if($_SESSION['loggedin'] == true)
+	{
+		include 'postfixindexloggedin.php';
+	}
+	else
+	{
+		include 'postfix.php';
+	}
+?>

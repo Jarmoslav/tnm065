@@ -9,7 +9,8 @@
 				<header>
 					<div id = "headerContent">
 						<a href = "index.php" id = "heading"><h1>LiU-Gram</h1></a>
-						<a id = "signinlink" href = 'login.php'>Sign in!</a>
+						<a id = "signoutlink" href = 'logout.php'>Sign out!</a>
+						<p>Logged in as <xsl:value-of select = "username"/>
 					</div>
 
 				</header>
