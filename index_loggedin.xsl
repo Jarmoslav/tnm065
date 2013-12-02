@@ -9,6 +9,7 @@
 				<header>
 					<div id = "headerContent">
 						<a href = "index.php" id = "heading"><h1>LiU-Gram</h1></a>
+						<a id = "uploadlink" href = "uploadImage.php"> Upload Image! </a>
 						<a id = "signoutlink" href = "logout.php"> Logout </a>
 						<p>Logged in as <xsl:value-of select = "username"/></p>
 					</div>

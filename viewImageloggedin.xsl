@@ -9,6 +9,7 @@
 				<header>
 					<div id = "headerContent">
 						<a href = "index.php" id = "heading"><h1>LiU-Gram</h1></a>
+						<a id = "uploadlink" href = "uploadImage.php"> Upload Image! </a>
 						<a id = "signoutlink" href = 'logout.php'>Sign out!</a>
 						<p>Logged in as <xsl:value-of select = "username"/></p>
 					</div>
@@ -49,7 +50,7 @@
 				<form action = "addNewComment.php?pictureID={picid}" method = "post">
 					<ul id = "commentlist">
 						<li><textarea name = "newcomment" cols = "55" rows = "10">Write new comment...</textarea></li>
-							<li><input class = "button" name = "publishComment" type = "submit" value = "Add Comment"/></li>
+						<li><input class = "button" name = "publishComment" type = "submit" value = "Add Comment"/></li>
 					</ul>
 				</form>
 		</div>

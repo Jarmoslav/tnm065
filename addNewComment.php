@@ -20,7 +20,7 @@
 		$userName = $_SESSION['user'];
 		if(!empty($newComment))
 		{
-			$stmt = $dbh->prepare('INSERT INTO comment (pictureID,userName,text, time) VALUES (:PID,:USER,:COMMENT,:TIME)');
+			$stmt = $dbh->prepare('INSERT INTO comment (pictureID,userName,text,time) VALUES (:PID,:USER,:COMMENT,:TIME)');
 			$stmt->execute(array('PID'=>$picid, 'USER'=>$userName, 'COMMENT'=>$newComment, 'TIME'=>$time));
 		}
 		
