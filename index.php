@@ -48,7 +48,7 @@
 
 			echo "<picture>
 						<picuser>$picUser</picuser>
-						<picurl>$picURL</picurl> 
+						<picurl>thumbNailCreator.php?scaledImage=$picURL</picurl> 
 						<pictime>$picTime</pictime>
 						<picid>$picID</picid>";
 
