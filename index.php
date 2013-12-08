@@ -2,23 +2,15 @@
 	  //header("Content-type:text/xml;charset=utf-8");
 	  echo '<?xml version="1.0" standalone="no"?>';
 	  echo '<!DOCTYPE liugram SYSTEM "http://www.student.itn.liu.se/~johho982/TNM065/ProjektGrejer/liugram.dtd">';
+      echo '
+      <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+      <script type="text/javascript" src="javasqript.js"></script>';
+      
 	  include 'prefix.php';
 ?>
 
 <?php 
-	//This is the indexfile. It will have two different stylesheets. One for when you are logged in and one when you're not. 
-	// Something like this: 
-	
-	/*if(loggedin()){
-                echo '<?xml-stylesheet type="text/xsl" href="loggedin/index_loggedin.xsl"?>';
-                echo "<start_page_tutorials>";        
-                $username = $_SESSION['username'];
-                echo "<username>$username</username>";
-        }
-        else{
-                echo '<?xml-stylesheet type="text/xsl" href="index.xsl"?>';
-                echo "<start_page_tutorials>";
-        }*/
+
 
     //To start with we have only one stylesheet:
 
@@ -35,7 +27,7 @@
 
 		$result = $stmt->fetchAll();
 
-		//the picture element looks as follows: ELEMENT picture(picuser, picurl, pictime, picid, comment*, description)
+		//the picture element looks as follows: ELEMENT picture(picuser, picurl, pictime, comment*, description)
 		foreach($result as $r)
 		{
 			$picUser = $r['userName'];
@@ -51,8 +43,7 @@
 			echo "<picture>
 						<picuser>$picUser</picuser>
 						<picurl>$picURL</picurl> 
-						<pictime>$picTime</pictime>
-						<picid>$picID</picid>";
+						<pictime>$picTime</pictime>";
 
 
 			//Sorry för dåligt varibelnamn :D

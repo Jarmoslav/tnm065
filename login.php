@@ -1,5 +1,5 @@
 <?php
-
+session_start(); 
 /*
  * The Prepared Statement for login
  * 
@@ -26,7 +26,8 @@ try {
 	//checks if user exists in db
 	if ($query->rowCount() > 0) {
 		echo "valid user";
-		session_start();
+		
+		$_SESSION['loggad'] = true;
 	    $_SESSION['username'] = $username;
 	}
 	else{
