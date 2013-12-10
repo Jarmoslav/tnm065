@@ -64,7 +64,7 @@
 						  	else
 						    {
 							    
-							    if (file_exists("entryPics/nyhet/" . $_FILES["file"]["name"]))
+							    if (file_exists("img/$userName/" . $_FILES["file"]["name"]))
 							    {
 							    	echo $_FILES["file"]["name"] . "File already exists";
 							    }
@@ -80,7 +80,16 @@
 
 										move_uploaded_file($_FILES["file"]["tmp_name"], "img/$userName/" . $_FILES["file"]["name"]);
 
+										include "SimpleImage.php";
+
 										echo "Image uploaded!";
+
+										$scaledImage = new SimpleImage();
+										$scaledImage->load("$picPath");
+										$scaledImage->resizeToWidth(400);
+										$scaledImage->crop(67, 20, 323, 200);
+										$scaledImage->save("img/$userName/"."thumb".$_FILES["file"]["name"]);
+										echo "And thumNail too!";
 
 									}
 									else

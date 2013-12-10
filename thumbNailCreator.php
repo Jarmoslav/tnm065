@@ -8,7 +8,5 @@
 	$scaledImage = new SimpleImage();
 	$scaledImage->load($_GET['scaledImage']);
 	$scaledImage->resizeToWidth(400);
-	$scaledImage->crop(67, 20, 323, 200);
-	$scaledImage->output();
-	
+	$scaledImage->crop(67, 20, 323, 200);	
 ?>

@@ -43,16 +43,18 @@
 			$picTime = date('Y-m-d H:i', $picTime);
 			$picID = $r['pictureID'];
 			$description = $r['description'];
-
-			//Statement for comments on pictures.
+			//Position where the second slash is.
+			$pos = strpos($picURL, '/', 4);
+			$thumbURL = substr_replace($picURL, '/thumb', $pos, 1);
 
 			echo "<picture>
 						<picuser>$picUser</picuser>
-						<picurl>thumbNailCreator.php?scaledImage=$picURL</picurl> 
+						<picurl>$thumbURL</picurl> 
 						<pictime>$picTime</pictime>
 						<picid>$picID</picid>";
 
 
+			//Statement for comments on pictures.
 			//Sorry för dåligt varibelnamn :D
 			$stmt2 = $dbh->prepare('SELECT * FROM comment WHERE pictureID = :PID ORDER BY time DESC');
 			$stmt2->execute(array('PID' => $picID));
