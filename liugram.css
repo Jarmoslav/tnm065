@@ -113,8 +113,65 @@ header
 
 .userlink
 {
-	color: #77AADD;
+	color: #FF6600;
 	text-decoration: none;
+}
+
+.userlink:hover
+{
+	text-decoration: none;
+	color: #99CCFF;
+	-o-transition:.7s;
+  	-ms-transition:.7s;
+  	-moz-transition:.7s;
+  	-webkit-transition:.7s;
+  	/* ...and now for the proper property */
+  	transition:.7s;
+}
+
+.edit
+{
+	
+	margin-bottom: 2px;
+	display: inline-block;
+	padding: 2px;
+	text-decoration: none;
+	background-color: #FF6600;
+	border-radius: 5px;
+	color: white;
+	-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px;
+	-moz-box-shadow: 0px 2px 5px #333;
+	-webkit-box-shadow: 0px 2px 5px #333;
+	box-shadow: 0px 2px 5px #333;
+
+}
+
+.edit:hover
+{
+	margin-bottom: 2px;
+	display: inline-block;
+	padding: 2px;
+	text-decoration: none;
+	background-color: #33CC33;
+	border-radius: 5px;
+	color: white;
+	-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px;
+	-moz-box-shadow: 0px 2px 5px #333;
+	-webkit-box-shadow: 0px 2px 5px #333;
+	box-shadow: 0px 2px 5px #333;
+	-o-transition:.7s;
+  	-ms-transition:.7s;
+  	-moz-transition:.7s;
+  	-webkit-transition:.7s;
+  	/* ...and now for the proper property */
+  	transition:.7s;
+}
+
+.username
+{
+	color: #77AADD;
 }
 
 .pictime
@@ -367,4 +424,15 @@ textarea
 	position: relative;
 	font-size: 20px;
 	padding: 8px 14px 9px;	
+}
+
+
+.loggedinas
+{
+	color: white;
+}
+
+#editdescr
+{
+	padding: 20px;
 }

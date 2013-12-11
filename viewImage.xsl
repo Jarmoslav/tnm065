@@ -31,7 +31,7 @@
 
 	<xsl:template match = "picture">
 		<div id = "expandedImage">
-			<p>Uploaded By: <a href = "#" class = "userlink"><xsl:value-of select = "picuser"/></a></p>
+			<p class = "username">Uploaded By: <xsl:value-of select = "picuser"/></p>
 			<img width = "700" src = "{picurl}" alt = "test"/>
 			<h3> Description: </h3>
 			<p><xsl:value-of select = "description"/></p>
@@ -46,7 +46,7 @@
 
 	<xsl:template match = "comment">
 			<div id = "comment">
-				<p><a href = "#" class = "userlink"><xsl:value-of select = "commentuser"/></a></p>
+				<p class = "username"><xsl:value-of select = "commentuser"/></p>
 				<p class = "commenttime"><xsl:value-of select = "commenttime"/></p>
 				<p class = "commenttext"><xsl:value-of select = "commenttext"/></p>
 		</div>

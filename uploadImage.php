@@ -20,7 +20,7 @@
 				<a id = "uploadlink" href = 'index.php'>Back to Feed!</a>
 				<a id = "signoutlink" href = 'logout.php'>Sign out!</a>
 				<?php 					
-					echo "<p>Logged in as $userName</p>";
+					echo "<p class = 'loggedinas'>Logged in as <a class = 'userlink' href = 'userProfile.php'>$userName</a></p>";
 				?>
 			</div>
 
@@ -82,14 +82,14 @@
 
 										include "SimpleImage.php";
 
-										echo "Image uploaded!";
+										
 
 										$scaledImage = new SimpleImage();
 										$scaledImage->load("$picPath");
 										$scaledImage->resizeToWidth(400);
 										$scaledImage->crop(67, 20, 323, 200);
 										$scaledImage->save("img/$userName/"."thumb".$_FILES["file"]["name"]);
-										echo "And thumNail too!";
+										echo "Image uploaded!";
 
 									}
 									else
@@ -101,7 +101,7 @@
 						  }
 						else
 						{
-							echo "You must choose and image!";
+							echo "You must choose an image!";
 						}
 
 					}

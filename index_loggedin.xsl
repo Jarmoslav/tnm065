@@ -11,7 +11,7 @@
 						<a href = "index.php" id = "heading"><h1>LiU-Gram</h1></a>
 						<a id = "uploadlink" href = "uploadImage.php"> Upload Image! </a>
 						<a id = "signoutlink" href = "logout.php"> Logout </a>
-						<p>Logged in as <xsl:value-of select = "username"/></p>
+						<p class = "loggedinas">Logged in as <a class = "userlink" href = "userProfile.php"><xsl:value-of select = "username"/></a></p>
 					</div>
 
 				</header>
@@ -31,7 +31,7 @@
 	<xsl:template match = "picture">
 		<div class = "photoFrame">
 			<a href = 'viewImage.php?pictureID={picid}'><img height = "120" src = "{picurl}" alt = "test"/></a>
-			<p>Uploaded by: <a class = "userlink" href="#"><xsl:value-of select = "picuser"/></a></p>
+			<p class = "username">Uploaded by: <xsl:value-of select = "picuser"/></p>
 			<p class = "pictime"><xsl:value-of select = "pictime"/></p> 
 		</div>
 	</xsl:template>
