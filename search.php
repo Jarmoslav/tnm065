@@ -9,8 +9,9 @@ if ($_POST) {
 	$sql = "SELECT * FROM picture WHERE description LIKE :searchword";
 	$query = $dbh -> prepare($sql);
 	$query -> execute(array('searchword' => '%' . $searchword . '%'));
-	
+
 	while ($results = $query -> fetch()) {
+		$nr++;    
 		$outputUser =  $results['userName'];
 		$outputPicURL = $results['picURL'];
 		$outputTime = date('Y-m-d H:i',  $results['time']);	
@@ -23,7 +24,7 @@ if ($_POST) {
 						<pictime>$outputTime</pictime>
 						<picid>$outputPicID</picid>
 					<comment>
-						<commenttime>hej</commenttime>
+						<commenttime>$nr</commenttime>
 						<commentuser>are</commentuser>
 						<commenttext>eesadasdasds</commenttext>
 					</comment>
