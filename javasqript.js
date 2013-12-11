@@ -10,15 +10,17 @@ $(document).ready(function() {
 			window.location = "index.php"
 
 		} else {
-			$.ajax({
+			console.log("Fetchin " + dataString);
+			$.ajax({				
 				type : "POST",
 				url : "search.php",
 				data : dataString,
 				dataType : "xml",
-				cache : false,
 				success : function(data) {
+					console.log("Fetchin " + dataString);
                     $("#mainFeed").html('');
                     var htmlString = '';
+                    console.log(data);
 					//get the xml info via javasqript
 					var picUrl = $(data).find('picurl').text();
 					var picUser = $(data).find('picuser').text();
@@ -35,6 +37,5 @@ $(document).ready(function() {
 				}
 			});
 		}
-		return false;
 	});
 }); 

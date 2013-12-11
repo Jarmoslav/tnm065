@@ -4,31 +4,30 @@ include ('dbconnect.inc.php');
 if ($_POST) {
     echo '<?xml version="1.0" standalone="no"?>';
     echo '<!DOCTYPE liugram SYSTEM "http://www.student.itn.liu.se/~johho982/TNM065/ProjektGrejer/liugram.dtd">';
-    echo '<?xml-stylesheet type="text/xsl" href="index.xsl"?>';
+    /*echo '<?xml-stylesheet type="text/xsl" href="index.xsl"?>';*/
 	$searchword = $_POST['searchword'];
 	$sql = "SELECT * FROM picture WHERE description LIKE :searchword";
 	$query = $dbh -> prepare($sql);
-	$query -> execute(array('searchword' => '%' . $searchword . '%'));
-	
+	$query -> execute(array('searchword' => "%".$searchword."%"));
 
-	while ($results = $query -> fetchAll()) {
-		
-		if($query->rowCount() != 0)
-		{		
+	$r = $query->fetchAll();
 
+	$output = "";
+
+	foreach($r as $results) 
+	{		
 			$outputUser =  $results['userName'];
 			$outputPicURL = $results['picURL'];
 			$outputTime = $results['time'];
 			$outputTime = strtotime($outputTime);
 			$outputTime = date('Y-m-d H:i', $outputTime);	
-			$outputString = $results['description'];	
 	        $outputPicID = $results['pictureID'];
 	        $outputDesc = $results['description'];	
 
 	        $pos = strpos($outputPicURL, '/', 4);
 			$thumbURL = substr_replace($outputPicURL, '/thumb', $pos, 1);
 			
-			 echo "<picture>
+			$output = $output."<picture>
 							<picuser>$outputUser</picuser>
 							<picurl>$thumbURL</picurl> 
 							<pictime>$outputTime</pictime>
@@ -42,13 +41,8 @@ if ($_POST) {
 	                    $outputDesc
 	                </description>	
 				</picture>";
-
-		}
-?>
-
-<?php
 	}
+	echo $output;
 }
-else
-{}
+
 ?>

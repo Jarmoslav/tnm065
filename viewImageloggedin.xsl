@@ -53,6 +53,11 @@
 						<li><input class = "button" name = "publishComment" type = "submit" value = "Add Comment"/></li>
 					</ul>
 				</form>
+
+
+				<p style = "margin: 20px;"> Share this image on twitter! </p>
+				<a href="https://twitter.com/share" class="twitter-share-button" data-text="Check out this image on LiU-Gram!" data-url="http://bit.ly/viewImage?pictureID={picid}" data-counturl="http://localhost:8888/TNM065/repo/viewImage.php?pictureID={picid}" data-size="large" data-lang="en">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 		</div>
 	</xsl:template>
 
@@ -61,6 +66,7 @@
 				<p class = "username"><xsl:value-of select = "commentuser"/></p>
 				<p class = "commenttime"><xsl:value-of select = "commenttime"/></p>
 				<p class = "commenttext"><xsl:value-of select = "commenttext"/></p>
+
 		</div>
 	</xsl:template>
 

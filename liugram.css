@@ -15,6 +15,7 @@ iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 body
 {
 	font-family: "Trebuchet MS", Helvetica, sans-serif;	
+	background-image: url('miscimg/backTile.png');
 }
 
 header
@@ -466,3 +467,24 @@ overflow:hidden;
 	padding: 20px;
 }
 
+#delete
+{
+	cursor: pointer;
+	margin-left: 50px;
+	color: white;
+	border: none;
+	background: #CC3333 url("miscimg/alert-overlay.png") repeat-x;
+	display: inline-block;	
+	text-decoration: none;
+	font-weight: bold;
+	line-height: 1;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+	-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+	text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+	border-bottom: 1px solid rgba(0,0,0,0.25);
+	position: relative;
+	font-size: 20px;
+	padding: 8px 14px 9px;
+}

@@ -29,7 +29,6 @@
 			<div id = "pagewrapper">
 				<h2> Edit or delete image.</h2>
 
-				<p>Edit description! </p>
 				<div id = "editdescr">
 					<?php 
 						include "dbconnect.inc.php";
@@ -51,12 +50,13 @@
 
 							echo "<div class = 'photoFrame'>
 								  	<img height = '160' src = '$thumbURL' alt = 'test' />
-								  	<form method = 'post' action = ''>
+								  	<form method = 'post' action = '' id = 'editForm'>
 								  		<ul id = 'commentlist'>
 											<li><textarea name = 'newDescr' cols = '40' rows = '5'>$description</textarea></li>
 											<li><input class = 'button' name = 'editDescr' type = 'submit' value = 'Edit Comment'/></li>
 										</ul>
 								  	</form>";
+
 							if(isset($_POST['editDescr']))
 							{
 
@@ -68,13 +68,30 @@
 									$update->execute(array('DESCR'=>$newDescr, 'USER'=>$userName, 'PID'=>$pictureID));
 									echo "Description has been edited!";
 								}								
-
-								
 							}
-
 							echo "</div>";
+						}
+					?>
 
+					<button id = 'delete' form= "editForm"name = 'deleteButton' formmethod = 'POST' type = 'submit'> Delete Image </button>
 
+					<?php
+						if(isset($_POST['deleteButton']))
+						{
+							$getFilePath = $dbh->prepare('SELECT picURL FROM picture WHERE pictureID = :PID AND userName = :USER');
+							$getFilePath->execute(array('PID'=>$pictureID, 'USER'=>$userName));
+
+							$filePath = $getFilePath->fetch();
+							$theFilePath = $filePath['picURL'];
+
+							$deleteImage = $dbh->prepare('DELETE FROM picture WHERE pictureID = :PID AND userName = :USER');
+							$deleteImage->execute(array('PID'=>$pictureID, 'USER'=>$userName));
+
+							unlink($theFilePath);
+							$pos = strpos($theFilePath, '/', 4);
+							$thumbURL = substr_replace($theFilePath, '/thumb', $pos, 1);
+							unlink($thumbURL);
+							echo "Image is deleted!";
 						}
 					?>
 				</div>
