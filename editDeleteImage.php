@@ -66,7 +66,7 @@
 								{
 									$update = $dbh->prepare('UPDATE picture SET description = :DESCR WHERE userName = :USER AND pictureID = :PID');
 									$update->execute(array('DESCR'=>$newDescr, 'USER'=>$userName, 'PID'=>$pictureID));
-									echo "Description has been edited!";
+									header("Location editDelete.php?pictureID = $pictureID");
 								}								
 
 								
