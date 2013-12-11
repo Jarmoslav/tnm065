@@ -10,27 +10,40 @@ if ($_POST) {
 	$query = $dbh -> prepare($sql);
 	$query -> execute(array('searchword' => '%' . $searchword . '%'));
 	
-	while ($results = $query -> fetch()) {
-		$outputUser =  $results['userName'];
-		$outputPicURL = $results['picURL'];
-		$outputTime = date('Y-m-d H:i',  $results['time']);	
-		$outputString = $results['description'];	
-        $outputPicID = $results['pictureID'];	
+
+	while ($results = $query -> fetchAll()) {
 		
-		 echo "<picture>
-						<picuser>$outputUser</picuser>
-						<picurl>$outputPicURL</picurl> 
-						<pictime>$outputTime</pictime>
-						<picid>$outputPicID</picid>
-					<comment>
-						<commenttime>hej</commenttime>
-						<commentuser>are</commentuser>
-						<commenttext>eesadasdasds</commenttext>
-					</comment>
-				<description>
-                    Lorem ipsum
-                </description>	
-			</picture>";
+		if($query->rowCount() != 0)
+		{		
+
+			$outputUser =  $results['userName'];
+			$outputPicURL = $results['picURL'];
+			$outputTime = $results['time'];
+			$outputTime = strtotime($outputTime);
+			$outputTime = date('Y-m-d H:i', $outputTime);	
+			$outputString = $results['description'];	
+	        $outputPicID = $results['pictureID'];
+	        $outputDesc = $results['description'];	
+
+	        $pos = strpos($outputPicURL, '/', 4);
+			$thumbURL = substr_replace($outputPicURL, '/thumb', $pos, 1);
+			
+			 echo "<picture>
+							<picuser>$outputUser</picuser>
+							<picurl>$thumbURL</picurl> 
+							<pictime>$outputTime</pictime>
+							<picid>$outputPicID</picid>
+						<comment>
+							<commenttime>hej</commenttime>
+							<commentuser>are</commentuser>
+							<commenttext>eesadasdasds</commenttext>
+						</comment>
+					<description>
+	                    $outputDesc
+	                </description>	
+				</picture>";
+
+		}
 ?>
 
 <?php

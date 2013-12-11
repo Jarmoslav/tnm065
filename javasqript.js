@@ -23,10 +23,11 @@ $(document).ready(function() {
 					var picUrl = $(data).find('picurl').text();
 					var picUser = $(data).find('picuser').text();
 					var picTime = $(data).find('pictime').text();
+					var picID = $(data).find('picid').text();
 					
 					htmlString += '<div class = "photoFrame">';
-					htmlString += '<a href ="viewImage.php?pictureID="' + picUrl + '><img height = "120" src = ' + picUrl + ' alt = "test"/></a>';
-					htmlString += '<p>Uploaded by:<a class = "userlink" href="#">' + picUser + ' </a></p>';
+					htmlString += '<a href ="viewImage.php?pictureID=' + picID + '"><img height = "120" src =' + picUrl + ' alt = "test"/></a>';
+					htmlString += '<p class = "username">Uploaded by:' + picUser + '</p>';
 					htmlString += '<p class = "pictime">' + picTime + '</p>';
 					htmlString += '</div>';
 					//set the values into the DOM
