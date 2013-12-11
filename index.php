@@ -1,4 +1,5 @@
-<?php 	  
+<?php 	 
+	  
 	  //header("Content-type:text/xml;charset=utf-8");
 	  echo '<?xml version="1.0" standalone="no"?>';
 	  echo '<!DOCTYPE liugram SYSTEM "http://www.student.itn.liu.se/~johho982/TNM065/ProjektGrejer/liugram.dtd">';
@@ -8,18 +9,29 @@
       
 	  include 'prefix.php';
 ?>
-
+<liugram>
 <?php 
 
+	session_start(); 
+	if($_SESSION['loggedin'] == true && $_SESSION['user'] != "")
+	{
+		$userName = $_SESSION['user'];
+		echo '<?xml-stylesheet type="text/xsl" href="index_loggedin.xsl"?>';
+		echo "<username>$userName</username>";
+	}
+	else
+	{
+		echo '<?xml-stylesheet type="text/xsl" href="index.xsl"?>';
+	}
+    
 
-    //To start with we have only one stylesheet:
-
-       echo '<?xml-stylesheet type="text/xsl" href="index.xsl"?>';
 ?>
 
-<liugram>
+
 	<?php
 		include "dbconnect.inc.php";
+
+		//liugram tag must include <username> </username>
 
 		//PDO-statement for fetching from database
 		$stmt = $dbh->prepare('SELECT * FROM picture ORDER BY time DESC');
@@ -37,15 +49,18 @@
 			$picTime = date('Y-m-d H:i', $picTime);
 			$picID = $r['pictureID'];
 			$description = $r['description'];
-
-			//Statement for comments on pictures.
+			//Position where the second slash is.
+			$pos = strpos($picURL, '/', 4);
+			$thumbURL = substr_replace($picURL, '/thumb', $pos, 1);
 
 			echo "<picture>
-						<picuser>$picUser</picuser>
-						<picurl>$picURL</picurl> 
-						<pictime>$picTime</pictime>";
+						<picuser>$picUser</picuser>					
+						<picurl>$thumbURL</picurl> 
+						<pictime>$picTime</pictime>
+						<picid>$picID</picid>";
 
 
+			//Statement for comments on pictures.
 			//Sorry för dåligt varibelnamn :D
 			$stmt2 = $dbh->prepare('SELECT * FROM comment WHERE pictureID = :PID ORDER BY time DESC');
 			$stmt2->execute(array('PID' => $picID));
@@ -74,4 +89,13 @@
 		}
 	?>
 </liugram>
-<?php include 'postfix.php';?>
+<?php 
+	if($_SESSION['loggedin'] == true && $_SESSION['user'] != "")
+	{
+		include 'postfixindexloggedin.php';
+	}
+	else
+	{
+		include 'postfix.php';
+	}
+?>

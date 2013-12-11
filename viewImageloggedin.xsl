@@ -9,7 +9,9 @@
 				<header>
 					<div id = "headerContent">
 						<a href = "index.php" id = "heading"><h1>LiU-Gram</h1></a>
-						<a id = "signinlink" href = 'login.php'>Sign in!</a>
+						<a id = "uploadlink" href = "uploadImage.php"> Upload Image! </a>
+						<a id = "signoutlink" href = 'logout.php'>Sign out!</a>
+						<p class = "loggedinas">Logged in as <a class = "userlink" href = "userProfile.php"><xsl:value-of select = "username"/></a></p>
 					</div>
 
 				</header>
@@ -42,6 +44,16 @@
 			<xsl:apply-templates select = "comment"/>
 		</div>
 
+		<div id = "addcomment">
+			<p>Write new comment!</p>
+
+				<form action = "addNewComment.php?pictureID={picid}" method = "post">
+					<ul id = "commentlist">
+						<li><textarea name = "newcomment" cols = "55" rows = "10">Write new comment...</textarea></li>
+						<li><input class = "button" name = "publishComment" type = "submit" value = "Add Comment"/></li>
+					</ul>
+				</form>
+		</div>
 	</xsl:template>
 
 	<xsl:template match = "comment">

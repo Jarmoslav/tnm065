@@ -1,29 +1,50 @@
 <?php
-    session_start();
-	if (isset( $_SESSION[ 'logged_in' ])==true){
-	  echo "You are logged in<br/>";
-	}else {
-	  echo "You are not logged in, please login or sign up<br/>";
-	 //login form
-	  echo "<h1>Login Here</h1>
-			<form name='login' action='login.php' method='POST'>
-			  <label for 'username'>Username: </label>
-			  <input type='text' name='username'/>
-			  <label for 'password'>Password: </label>
-			  <input type='password' name='password'/>
-			  <br/>
-			  <button type='submit'>Submit</button>
-			 </form>";
+
+	include "dbconnect.inc.php";
+	session_start();
+
+	$userName = $_POST['username'];
+	$password = md5($_POST['password']);
+
+	/*
+	 * The Prepared Statement for login
+	 */	  
+
+	if(!empty($password) && !empty($userName))
+	{
+		
+		$stmt = $dbh->prepare('SELECT * FROM user WHERE userName=:username AND password=:password');
+		$stmt->execute(array('username'=> $userName, 'password'=> $password));
+
+		$result = $stmt->fetchAll();
+
+
+		if($stmt->rowCount() == 1)
+		{
+			foreach($result as $r)
+			{
+				$userDB = $r['userName'];
+
+				if($userDB == $userName)
+				{
+					$_SESSION['loggedin']=true;
+					$_SESSION['user']="$userName";
+					header("Location: index.php");
+				}
+				else
+				{
+					$_SESSION['loggedin']="noSuchUser";
+					header("Location: login.php");
+				}
+			}
+			
+		}
+		else
+		{
+			$_SESSION['loggedin']="noSuchUser";
+			header("Location: login.php");
+		}
+		
 	}
-	//sign up form
-	echo "</br>";
-	echo "<h1>Registration</h1>
-			<form name='registration' action='signup.php' method='POST'>
-			  <label for 'username'>Username: </label>
-			  <input type='text' name='username'/>
-			  <label for 'password'>Password: </label>
-			  <input type='password' name='password'/>
-			  <br/>
-			  <button type='submit'>Submit</button>
-			 </form>";
-?> 
+
+?>

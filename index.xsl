@@ -13,6 +13,7 @@
 			<body>
 				<header>
 					<div id = "headerContent">
+
 						<a href = "index.php" id = "heading">
 							<h1>LiU-Gram</h1>
 						</a>
@@ -36,18 +37,10 @@
 	</xsl:template>
 	<xsl:template match = "picture">
 		<div class = "photoFrame">
-			<a href = 'viewImage.php?pictureID={picid}'>
-				<img height = "120" src = "{picurl}" alt = "test"/>
-			</a>
-			<p>
-				Uploaded by:
-				<a class = "userlink" href="#">
-					<xsl:value-of select = "picuser"/>
-				</a>
-			</p>
-			<p class = "pictime">
-				<xsl:value-of select = "pictime"/>
-			</p>
+<a href = 'viewImage.php?pictureID={picid}'><img height = "120" src = "{picurl}" alt = "test"/></a>
+			<p class = "username">Uploaded by: <xsl:value-of select = "picuser"/></p>
+			<p class = "pictime"><xsl:value-of select = "pictime"/></p> 
+
 		</div>
 	</xsl:template>
 
