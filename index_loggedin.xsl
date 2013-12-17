@@ -22,6 +22,7 @@
 					<div id = "mainFeed">
 						<xsl:apply-templates select = "picture"/>
 					</div> 
+					<a id = "rsslink" href = "indexRSS.php"><img height = "15" src = 'miscImg/bigrss.png' alt = 'rss'/>View feed as RSS!</a>
 				</div>
 
 			</body>

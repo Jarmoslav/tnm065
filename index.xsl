@@ -26,8 +26,9 @@
 				<div id = "pagewrapper">
 					<h2>Picture Feed</h2>
 					<div id = "mainFeed">
-						<xsl:apply-templates />
+						<xsl:apply-templates />						
 					</div>
+					<a id = "rsslink" href = "indexRSS.php"><img height = "15" src = 'miscImg/bigrss.png' alt = 'rss'/>View feed as RSS!</a>
 				</div>
 				<div id="display"></div>
 
@@ -37,10 +38,9 @@
 	</xsl:template>
 	<xsl:template match = "picture">
 		<div class = "photoFrame">
-<a href = 'viewImage.php?pictureID={picid}'><img height = "120" src = "{picurl}" alt = "test"/></a>
+			<a href = 'viewImage.php?pictureID={picid}'><img height = "120" src = "{picurl}" alt = "test"/></a>
 			<p class = "username">Uploaded by: <xsl:value-of select = "picuser"/></p>
 			<p class = "pictime"><xsl:value-of select = "pictime"/></p> 
-
 		</div>
 	</xsl:template>
 

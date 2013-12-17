@@ -180,6 +180,34 @@ header
 	font-style: italic;
 }
 
+#rsslink
+{
+	padding: 10px;
+	display: inline-block;
+	margin-left: 30px;
+	margin-bottom: 20px;
+	text-decoration: none;
+	background-color: rgb(255, 152, 51);
+	border-radius: 5px;
+	color: white;
+	-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px;
+	-moz-box-shadow: 0px 2px 5px #333;
+	-webkit-box-shadow: 0px 2px 5px #333;
+	box-shadow: 0px 2px 5px #333;
+}
+
+#rsslink:hover
+{
+	background-color: #99CCFF;
+	-o-transition:.7s;
+  	-ms-transition:.7s;
+  	-moz-transition:.7s;
+  	-webkit-transition:.7s;
+  	/* ...and now for the proper property */
+  	transition:.7s;
+}
+
 #signinlink
 {
 	padding: 10px;
