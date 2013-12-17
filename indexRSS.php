@@ -32,12 +32,9 @@
 			$picTime = date('Y-m-d H:i', $picTime);
 			$picID = $r['pictureID'];
 			$description = $r['description'];
-			//Position where the second slash is.
-			$pos = strpos($picURL, '/', 4);
-			$thumbURL = substr_replace($picURL, '/thumb', $pos, 1);
 
 			echo "<item rdf:about='http://localhost:8888/TNM065/repo/viewImage.php?pictureID=$picID'>
-					<title>Image by: $picUser</title>
+					<title>Image by user: $picUser</title>
 					<link>http://localhost:8888/TNM065/repo/viewImage.php?pictureID=$picID</link>
 					<description>
 						<![CDATA[
