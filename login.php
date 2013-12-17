@@ -35,9 +35,13 @@
 					</ul>
 				</form>
 				<?php
-					if($_SESSION['loggedin']=="noSuchUser")
+					if($_GET['loginStatus']=="noSuchUser")
 					{
 						echo "<p style = 'text-align:center;'>Wrong username or password! </p>";
+					}
+					if($_GET['loginStatus']=="fillAllFieldsLogin")
+					{
+						echo "<p style = 'text-align:center;'>You have to fill all fields! </p>";
 					}
 				?>
 			</div>

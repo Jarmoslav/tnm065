@@ -4,14 +4,16 @@
 	session_start();
 
 	$userName = $_POST['username'];
-	$password = md5($_POST['password']);
+	$password = $_POST['password'];
 
 	/*
 	 * The Prepared Statement for login
 	 */	  
 
 	if(!empty($password) && !empty($userName))
+	//if($userName != "" && $password != "")
 	{
+		$password = md5($password);
 		
 		$stmt = $dbh->prepare('SELECT * FROM user WHERE userName=:username AND password=:password');
 		$stmt->execute(array('username'=> $userName, 'password'=> $password));
@@ -33,18 +35,21 @@
 				}
 				else
 				{
-					$_SESSION['loggedin']="noSuchUser";
-					header("Location: login.php");
+					header("Location: login.php?loginStatus=noSuchUser");
 				}
 			}
 			
 		}
 		else
 		{
-			$_SESSION['loggedin']="noSuchUser";
-			header("Location: login.php");
+			header("Location: login.php?loginStatus=noSuchUser");
 		}
 		
+	}
+	else
+	{
+		//$_SESSION['loggedin']="fillAllFields";
+		header("Location: login.php?loginStatus=fillAllFieldsLogin");
 	}
 
 ?>
