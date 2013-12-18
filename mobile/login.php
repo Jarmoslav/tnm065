@@ -1,11 +1,5 @@
 <?php
-	require_once "Mobile_Detect.php";
-	  $detect = new Mobile_Detect;
 
-	  if($detect->isMobile())
-	  {
-	  	header("Location: mobile/viewImage.php");
-	  } 
 	//session för att kolla att  man bara kan komma åt sidan då man är inloggad	
 	session_start();
 	
@@ -20,7 +14,7 @@
 <html>
 	<head>
 		<title>LiU-Gram - Sign in!</title>
-		<link rel="stylesheet" type="text/css" media="screen" href="liugram.css"/>
+		<link rel="stylesheet" type="text/css" media="screen" href="mobile.css"/>
 	</head>
 	<body>
 		<header>

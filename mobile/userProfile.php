@@ -1,12 +1,16 @@
+<?php	
+	session_start(); 
+	if($_SESSION['loggedin'] != true || $_SESSION['user'] == "")
+	{
+		header("Location: index.php");
+	}
+	else
+	{
+		$userName = $_SESSION['user'];		
+	}
+?>
+
 <?php 	  
-	  require_once "Mobile_Detect.php";
-	  $detect = new Mobile_Detect;
-
-	  if($detect->isMobile())
-	  {
-	  	header("Location: mobile/viewImage.php");
-	  } 
-
 	  //header("Content-type:text/xml;charset=utf-8");
 	  echo '<?xml version="1.0" standalone="no"?>';
 	  echo '<!DOCTYPE liugram SYSTEM "http://www.student.itn.liu.se/~johho982/TNM065/ProjektGrejer/liugram.dtd">';
@@ -15,26 +19,15 @@
 	  //xsl-stylesheet
 ?>
 <liugram>
-<?php	
-	session_start(); 
-	if($_SESSION['loggedin'] == true && $_SESSION['user'] != "")
-	{
-		$userName = $_SESSION['user'];
-		echo '<?xml-stylesheet type="text/xsl" href="viewImageloggedin.xsl"?>';
-		echo "<username>$userName</username>";
-	}
-	else
-	{
-		echo '<?xml-stylesheet type="text/xsl" href="viewImage.xsl"?>';
-	}
-?>
+
 <?php
-	$picID = $_GET['pictureID'];
+	echo '<?xml-stylesheet type="text/xsl" href="userProfile.xsl"?>';
+	echo "<username>$userName</username>";
 
 	include "dbconnect.inc.php";
 
-	$stmt = $dbh->prepare('SELECT * FROM picture WHERE pictureID = :chosenPictureID ORDER BY time DESC');
-	$stmt->execute(array('chosenPictureID' => $picID));
+	$stmt = $dbh->prepare('SELECT * FROM picture WHERE userName = :chosenUserName ORDER BY time DESC');
+	$stmt->execute(array('chosenUserName' => $userName));
 
 	$result = $stmt->fetchAll();
 
@@ -47,12 +40,14 @@
 			$picTime = date('Y-m-d H:i', $picTime);
 			$picID = $r['pictureID'];
 			$description = $r['description'];
+			$pos = strpos($picURL, '/', 4);
+			$thumbURL = substr_replace($picURL, '/thumb', $pos, 1);
 
 			//Statement for comments on pictures.
 
 			echo "<picture>
 						<picuser>$picUser</picuser>
-						<picurl>$picURL</picurl> 
+						<picurl>$thumbURL</picurl> 
 						<pictime>$picTime</pictime>
 						<picid>$picID</picid>";
 
@@ -88,11 +83,7 @@
 <?php
 	if($_SESSION['loggedin'] == true && $_SESSION['user'] != "")
 	{
-		include "viewImagePostfixloggedin.php";
-	}
-	else
-	{
-		include "viewImagePostfix.php";
+		include "userProfile_postFix.php";
 	}
 
 ?>

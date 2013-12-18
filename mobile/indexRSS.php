@@ -38,7 +38,7 @@
 					<link>http://localhost:8888/TNM065/repo/viewImage.php?pictureID=$picID</link>
 					<description>
 						<![CDATA[
-							<img src = '$picURL' alt = 'newsImage' width = '100%' />
+							<img src = '$picURL' alt = 'newsImage' width = '100%'>
 							<br/>
 							$description <br /><br />
 							Comments: <br /><br />";
