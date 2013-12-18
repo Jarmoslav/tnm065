@@ -1,11 +1,4 @@
-<?php	  
-	  require_once "Mobile_Detect.php";
-	  $detect = new Mobile_Detect;
-
-	  if($detect->isMobile())
-	  {
-	  	header("Location: mobile/index.php");
-	  } 	 
+<?php 	 
 	  
 	  //header("Content-type:text/xml;charset=utf-8");
 	  echo '<?xml version="1.0" standalone="no"?>';
@@ -59,10 +52,12 @@
 			//Position where the second slash is.
 			$pos = strpos($picURL, '/', 4);
 			$thumbURL = substr_replace($picURL, '/thumb', $pos, 1);
+			$temp = "../";
+			$temp .= $thumbURL;
 
 			echo "<picture>
 						<picuser>$picUser</picuser>					
-						<picurl>$thumbURL</picurl> 
+						<picurl>$temp</picurl> 
 						<pictime>$picTime</pictime>
 						<picid>$picID</picid>";
 

@@ -6,7 +6,7 @@
 				<!--javasqript stuffy-->
 				<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 				<!-- stylesheets-->
-				<link rel="stylesheet" type="text/css" media="screen" href="liugram.css"/>
+				<link rel="stylesheet" type="text/css" media="screen" href="mobile.css"/>
 			
 
 			</head>
@@ -17,8 +17,8 @@
 						<a href = "index.php" id = "heading">
 							<h1>LiU-Gram</h1>
 						</a>
-						<input type="text" class="search" id="searchbox" value = ""/>
 						<a id = "signinlink" href = 'login.php'>Sign in!</a>
+						<a id = "rsslink" href = "../indexRSS.php"><img height = "12%" src = '../miscImg/bigrss.png' alt = 'rss'/>Feed as RSS</a>
 
 					</div>
 
@@ -28,9 +28,9 @@
 					<div id = "mainFeed">
 						<xsl:apply-templates />						
 					</div>
-					<a id = "rsslink" href = "indexRSS.php"><img height = "15" src = 'miscImg/bigrss.png' alt = 'rss'/>View feed as RSS!</a>
+					
 				</div>
-				
+				<div id="display"></div>
 
 			</body>
 
@@ -38,7 +38,7 @@
 	</xsl:template>
 	<xsl:template match = "picture">
 		<div class = "photoFrame">
-			<a href = 'viewImage.php?pictureID={picid}'><img height = "120" src = "{picurl}" alt = "test"/></a>
+			<a href = 'viewImage.php?pictureID={picid}'><img height = "600" src = "{picurl}" alt = "test"/></a>
 			<p class = "username">Uploaded by: <xsl:value-of select = "picuser"/></p>
 			<p class = "pictime"><xsl:value-of select = "pictime"/></p> 
 		</div>

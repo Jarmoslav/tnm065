@@ -1,73 +1,56 @@
-<?php	  
-	  require_once "Mobile_Detect.php";
-	  $detect = new Mobile_Detect;
-
-	  if($detect->isMobile())
-	  {
-	  	header("Location: mobile/index.php");
-	  } 	 
-	  
+<?php 	  
 	  //header("Content-type:text/xml;charset=utf-8");
 	  echo '<?xml version="1.0" standalone="no"?>';
 	  echo '<!DOCTYPE liugram SYSTEM "http://www.student.itn.liu.se/~johho982/TNM065/ProjektGrejer/liugram.dtd">';
-      echo '
-      <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-      <script type="text/javascript" src="javasqript.js"></script>';
-      
 	  include 'prefix.php';
+
+	  //xsl-stylesheet
 ?>
 <liugram>
-<?php 
-
+<?php	
 	session_start(); 
 	if($_SESSION['loggedin'] == true && $_SESSION['user'] != "")
 	{
 		$userName = $_SESSION['user'];
-		echo '<?xml-stylesheet type="text/xsl" href="index_loggedin.xsl"?>';
+		echo '<?xml-stylesheet type="text/xsl" href="viewImageloggedin.xsl"?>';
 		echo "<username>$userName</username>";
 	}
 	else
 	{
-		echo '<?xml-stylesheet type="text/xsl" href="index.xsl"?>';
+		echo '<?xml-stylesheet type="text/xsl" href="viewImage.xsl"?>';
 	}
-    
-
 ?>
+<?php
+	$picID = $_GET['pictureID'];
 
+	include "dbconnect.inc.php";
 
-	<?php
-		include "dbconnect.inc.php";
+	$stmt = $dbh->prepare('SELECT * FROM picture WHERE pictureID = :chosenPictureID ORDER BY time DESC');
+	$stmt->execute(array('chosenPictureID' => $picID));
 
-		//liugram tag must include <username> </username>
+	$result = $stmt->fetchAll();
 
-		//PDO-statement for fetching from database
-		$stmt = $dbh->prepare('SELECT * FROM picture ORDER BY time DESC');
-		$stmt->execute();
-
-		$result = $stmt->fetchAll();
-
-		//the picture element looks as follows: ELEMENT picture(picuser, picurl, pictime, comment*, description)
-		foreach($result as $r)
-		{
-			$picUser = $r['userName'];
+	foreach ($result as $r) 
+	{
+		$picUser = $r['userName'];
 			$picURL = $r['picURL'];
 			$picTime = $r['time'];
 			$picTime = strtotime($picTime);
 			$picTime = date('Y-m-d H:i', $picTime);
 			$picID = $r['pictureID'];
 			$description = $r['description'];
-			//Position where the second slash is.
-			$pos = strpos($picURL, '/', 4);
-			$thumbURL = substr_replace($picURL, '/thumb', $pos, 1);
+			$temp = "../";
+			$temp .= $picURL;
+
+			//Statement for comments on pictures.
 
 			echo "<picture>
-						<picuser>$picUser</picuser>					
-						<picurl>$thumbURL</picurl> 
+						<picuser>$picUser</picuser>
+						<picurl>$temp</picurl> 
 						<pictime>$picTime</pictime>
 						<picid>$picID</picid>";
 
 
-			//Statement for comments on pictures.
 			//Sorry för dåligt varibelnamn :D
 			$stmt2 = $dbh->prepare('SELECT * FROM comment WHERE pictureID = :PID ORDER BY time DESC');
 			$stmt2->execute(array('PID' => $picID));
@@ -93,16 +76,17 @@
 					$description
 				  </description>";
 			echo "</picture>";
-		}
-	?>
+	}
+?>
 </liugram>
-<?php 
+<?php
 	if($_SESSION['loggedin'] == true && $_SESSION['user'] != "")
 	{
-		include 'postfixindexloggedin.php';
+		include "viewImagePostfixloggedin.php";
 	}
 	else
 	{
-		include 'postfix.php';
+		include "viewImagePostfix.php";
 	}
+
 ?>

@@ -4,7 +4,7 @@ include ('dbconnect.inc.php');
 if ($_POST) {
     header('Content-type: application/xml');    
     echo '<?xml version="1.0" standalone="no"?>';
-    
+
  
 	$searchword = $_POST['searchword'];
 	$sql = "SELECT * FROM picture WHERE description LIKE :searchword";
@@ -47,5 +47,5 @@ if ($_POST) {
      echo $outputXML;
 }
 
- 
+
 ?>

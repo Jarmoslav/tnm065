@@ -15,6 +15,7 @@ iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 body
 {
 	font-family: "Trebuchet MS", Helvetica, sans-serif;	
+	background-image: url('miscimg/backTile.png');
 }
 
 header
@@ -66,7 +67,7 @@ header
 #pagewrapper h2
 {
 	font-size: 1.8em;
-	text-align: left;
+	text-align: center;
 }
 
 #mainFeed
@@ -144,7 +145,6 @@ header
 	-moz-box-shadow: 0px 2px 5px #333;
 	-webkit-box-shadow: 0px 2px 5px #333;
 	box-shadow: 0px 2px 5px #333;
-
 }
 
 .edit:hover
@@ -177,6 +177,34 @@ header
 .pictime
 {
 	font-style: italic;
+}
+
+#rsslink
+{
+	padding: 10px;
+	display: inline-block;
+	margin-left: 30px;
+	margin-bottom: 20px;
+	text-decoration: none;
+	background-color: rgb(255, 152, 51);
+	border-radius: 5px;
+	color: white;
+	-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px;
+	-moz-box-shadow: 0px 2px 5px #333;
+	-webkit-box-shadow: 0px 2px 5px #333;
+	box-shadow: 0px 2px 5px #333;
+}
+
+#rsslink:hover
+{
+	background-color: #99CCFF;
+	-o-transition:.7s;
+  	-ms-transition:.7s;
+  	-moz-transition:.7s;
+  	-webkit-transition:.7s;
+  	/* ...and now for the proper property */
+  	transition:.7s;
 }
 
 #signinlink
@@ -353,6 +381,7 @@ header
 	text-decoration: none;
 	font-weight: bold;
 	line-height: 1;
+	border-radius: 5px;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
@@ -428,12 +457,14 @@ textarea
 .login
 {
 	border: none;
-	background: #FFFFEE url("miscimg/alert-overlay.png") repeat-x;
+	background: #FFFFEE; b
 	display: inline-block;	
 	text-decoration: none;
 	font-weight: bold;
 	line-height: 1;
 	width: 250px;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+	border-radius: 5px;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
@@ -466,3 +497,24 @@ overflow:hidden;
 	padding: 20px;
 }
 
+#delete
+{
+	cursor: pointer;
+	margin-left: 50px;
+	color: white;
+	border: none;
+	background: #CC3333 url("miscimg/alert-overlay.png") repeat-x;
+	display: inline-block;	
+	text-decoration: none;
+	font-weight: bold;
+	line-height: 1;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+	-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+	text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+	border-bottom: 1px solid rgba(0,0,0,0.25);
+	position: relative;
+	font-size: 20px;
+	padding: 8px 14px 9px;
+}

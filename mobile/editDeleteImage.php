@@ -1,11 +1,4 @@
 <?php
-	  require_once "Mobile_Detect.php";
-	  $detect = new Mobile_Detect;
-
-	  if($detect->isMobile())
-	  {
-	  	header("Location: mobile/index.php");
-	  } 
 	session_start();
 
 	if($_SESSION['loggedin'] != true || $_SESSION['user'] == "")
@@ -18,7 +11,7 @@
 <html>
 	<head>
 		<title><?php echo "$userName"?> - Edit</title>
-		<link rel="stylesheet" type="text/css" media="screen" href="liugram.css"/>
+		<link rel="stylesheet" type="text/css" media="screen" href="mobile.css"/>
 	</head>
 	<body>
 		<header>
@@ -54,9 +47,11 @@
 							$picURL = $r['picURL'];
 							$pos = strpos($picURL, '/', 4);
 							$thumbURL = substr_replace($picURL, '/thumb', $pos, 1);
+							$temp = "../";
+							$temp .= $thumbURL;
 
 							echo "<div class = 'photoFrame'>
-								  	<img height = '160' src = '$thumbURL' alt = 'test' />
+								  	<img height = '600' src = '$temp' alt = 'test' />
 								  	<form method = 'post' action = '' id = 'editForm'>
 								  		<ul id = 'commentlist'>
 											<li><textarea name = 'newDescr' cols = '40' rows = '5'>$description</textarea></li>

@@ -11,7 +11,8 @@ $(document).ready(function() {
 			//window.location = "index.php"
 
 		} else {
-			$.ajax({
+			console.log("Fetchin " + dataString);
+			$.ajax({				
 				type : "POST",
 				url : "search.php",
 				data : dataString,
@@ -26,6 +27,7 @@ $(document).ready(function() {
                     var pictureNumbers = data.getElementsByTagName("picture");
                     var pictureNumber, i;
                     console.log(pictureNumbers);
+
 					//get the xml info via javasqript
 					for(i = 0; i < pictureNumbers.length; i++){
                        
@@ -52,9 +54,6 @@ $(document).ready(function() {
 			    }
 			});
 		}
-		//return false;
-		
-		
-		
+
 	});
 }); 
