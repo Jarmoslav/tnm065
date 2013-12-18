@@ -2,41 +2,50 @@
 include ('dbconnect.inc.php');
 
 if ($_POST) {
+    header('Content-type: application/xml');    
     echo '<?xml version="1.0" standalone="no"?>';
-    echo '<!DOCTYPE liugram SYSTEM "http://www.student.itn.liu.se/~johho982/TNM065/ProjektGrejer/liugram.dtd">';
-    echo '<?xml-stylesheet type="text/xsl" href="index.xsl"?>';
+    
+ 
 	$searchword = $_POST['searchword'];
 	$sql = "SELECT * FROM picture WHERE description LIKE :searchword";
 	$query = $dbh -> prepare($sql);
 	$query -> execute(array('searchword' => '%' . $searchword . '%'));
-
-	while ($results = $query -> fetch()) {
-		$nr++;    
-		$outputUser =  $results['userName'];
-		$outputPicURL = $results['picURL'];
-		$outputTime = date('Y-m-d H:i',  $results['time']);	
-		$outputString = $results['description'];	
-        $outputPicID = $results['pictureID'];	
-		
-		 echo "<picture>
-						<picuser>$outputUser</picuser>
-						<picurl>$outputPicURL</picurl> 
-						<pictime>$outputTime</pictime>
-						<picid>$outputPicID</picid>
-					<comment>
-						<commenttime>$nr</commenttime>
-						<commentuser>are</commentuser>
-						<commenttext>eesadasdasds</commenttext>
-					</comment>
-				<description>
+	$nr=0;
+    $outputXML ="";
+    $results = $query->fetchAll(PDO::FETCH_ASSOC);
+    $outputUser1="";
+    
+    $outputXML.= "<liugram>";
+    
+    foreach($results as $row) {
+      
+        //echo " outputuser: ".$outputUser;
+        $outputUser =  $row['userName'];
+        $outputPicURL = $row['picURL'];
+        $outputTime = date('Y-m-d H:i',  $row['time']); 
+        $outputString = $row['description'];    
+        $outputPicID = $row['pictureID'];   
+        $outputXML.= "<picture>";
+        $outputXML.= "
+                    <picuser>$outputUser</picuser>
+                    <picurl>$outputPicURL</picurl> 
+                    <pictime>$outputTime</pictime>
+                    <picid>$outputPicID</picid>
+                    <comment>
+                        <commenttime>hej</commenttime>
+                        <commentuser>are</commentuser>
+                        <commenttext>eesadasdasds</commenttext>
+                    </comment>
+                <description>
                     Lorem ipsum
-                </description>	
-			</picture>";
-?>
-
-<?php
-	}
+                </description>  
+           ";
+        $outputXML .= "</picture>";
+     }
+    $outputXML.= "</liugram>";
+     
+     echo $outputXML;
 }
-else
-{}
+
+ 
 ?>
