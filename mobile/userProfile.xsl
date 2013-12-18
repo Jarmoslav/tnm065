@@ -3,7 +3,7 @@
 		<html>
 			<head>
 				<title><xsl:value-of select = "username"/></title>
-				<link rel="stylesheet" type="text/css" media="screen" href="liugram.css"/>
+				<link rel="stylesheet" type="text/css" media="screen" href="mobile.css"/>
 			</head>
 			<body>
 				<header>
@@ -30,7 +30,7 @@
 
 	<xsl:template match = "picture">
 		<div class = "photoFrame">
-			<a href = 'viewImage.php?pictureID={picid}'><img height = "120" src = "{picurl}" alt = "test"/></a>
+			<a href = 'viewImage.php?pictureID={picid}'><img height = "600" src = "{picurl}" alt = "test"/></a>
 			<p class = "username">Uploaded by: <xsl:value-of select = "picuser"/></p>
 			<p class = "pictime"><xsl:value-of select = "pictime"/></p> 
 			<a class = "edit" href = "editDeleteImage.php?pictureID={picid}">Edit</a>

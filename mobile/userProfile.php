@@ -42,12 +42,14 @@
 			$description = $r['description'];
 			$pos = strpos($picURL, '/', 4);
 			$thumbURL = substr_replace($picURL, '/thumb', $pos, 1);
+			$temp = "../";
+			$temp .= $thumbURL;
 
 			//Statement for comments on pictures.
 
 			echo "<picture>
 						<picuser>$picUser</picuser>
-						<picurl>$thumbURL</picurl> 
+						<picurl>$temp</picurl> 
 						<pictime>$picTime</pictime>
 						<picid>$picID</picid>";
 

@@ -1,4 +1,11 @@
 <?php
+	  require_once "Mobile_Detect.php";
+	  $detect = new Mobile_Detect;
+
+	  if($detect->isMobile())
+	  {
+	  	header("Location: mobile/index.php");
+	  } 
 	session_start();
 
 	if($_SESSION['loggedin'] != true || $_SESSION['user'] == "")
@@ -53,7 +60,7 @@
 								  	<form method = 'post' action = '' id = 'editForm'>
 								  		<ul id = 'commentlist'>
 											<li><textarea name = 'newDescr' cols = '40' rows = '5'>$description</textarea></li>
-											<li><input class = 'button' name = 'editDescr' type = 'submit' value = 'Edit Comment'/></li>
+											<li><input class = 'button' name = 'editDescr' type = 'submit' value = 'Edit Description'/></li>
 										</ul>
 								  	</form>";
 

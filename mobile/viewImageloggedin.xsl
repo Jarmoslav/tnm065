@@ -3,7 +3,7 @@
 		<html>
 			<head>
 				<title>LiU-Gram - View Image</title>
-				<link rel="stylesheet" type="text/css" media="screen" href="liugram.css"/>
+				<link rel="stylesheet" type="text/css" media="screen" href="mobile.css"/>
 			</head>
 			<body>
 				<header>
@@ -34,7 +34,7 @@
 	<xsl:template match = "picture">
 		<div id = "expandedImage">
 			<p class = "username">Uploaded By: <xsl:value-of select = "picuser"/></p>
-			<img width = "700" src = "{picurl}" alt = "test"/>
+			<img width = "99%" src = "{picurl}" alt = "test"/>
 			<h3> Description: </h3>
 			<p><xsl:value-of select = "description"/></p>
 		</div>
