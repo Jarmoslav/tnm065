@@ -8,7 +8,7 @@ $(document).ready(function() {
 		var searchbox = $(this).val(); // get the string in the searchbox
 		var dataString = 'searchword=' + searchbox;
 		if (searchbox == '') {
-			//window.location = "index.php"
+			window.location = "index.php"
 
 		} else {
 			console.log("Fetchin " + dataString);

@@ -434,7 +434,9 @@ textarea
 #loginwrapp
 {
 	float: left;
-	text-align: right;
+	text-align: center;
+	margin-left: 100px;
+
 }
 
 #loginwrapp ul
@@ -445,7 +447,8 @@ textarea
 #signupwrapp
 {
 	float:left;
-	text-align: right;
+	text-align: center;
+	margin-left: 100px;
 
 }
 

@@ -35,8 +35,8 @@
 				<h2 style ="text-align:center;"> Sign in! </h2>
 				<form name = "loginform" method = "post" action = "login_check.php">
 					<ul>
-						<li><label> UserName: <input class = "login" type="text" name= "username"/></label></li>
-						<li><label> Password: <input class = "login" type="password" name= "password"/></label></li>
+						<li><input class = "login" type="text" name= "username" placeholder = "Username"/></li>
+						<li><input class = "login" type="password" name= "password" placeholder = "Password"/></li>
 						<li style = "text-align:center;"><input class = "button" type = "submit" name = "submit" value = "Sign in!"/></li>
 					</ul>
 				</form>
@@ -56,9 +56,9 @@
 				<h2 style = "text-align:center;"> Sign up! </h2>
 				<form name = "signupform" method = "post" action = "createNewUser.php">
 					<ul>
-						<li><label> UserName: <input class = "login" type="text" name= "signupusername"/></label></li>
-						<li><label> Password: <input class = "login" type="password" name= "signuppassword"/></label></li>
-						<li><label> Password again: <input class = "login" type="password" name= "signuppassword2"/></label></li>
+						<li><input class = "login" type="text" name= "signupusername" placeholder = "Username"/></li>
+						<li><input class = "login" type="password" name= "signuppassword" placeholder = "Password"/></li>
+						<li><input class = "login" type="password" name= "signuppassword2" placeholder = "Password again"/></li>
 						<li style = "text-align:center;"><input class = "button" type = "submit" name = "submit2" value = "Sign up!"/></li>
 					</ul>
 				</form>

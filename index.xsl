@@ -17,7 +17,7 @@
 						<a href = "index.php" id = "heading">
 							<h1>LiU-Gram</h1>
 						</a>
-						<input type="text" class="search" id="searchbox" value = ""/>
+						<input type="text" class="search" id="searchbox" placeholder = "Search..."/>
 						<a id = "signinlink" href = 'login.php'>Sign in!</a>
 
 					</div>

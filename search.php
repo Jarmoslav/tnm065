@@ -22,23 +22,19 @@ if ($_POST) {
         //echo " outputuser: ".$outputUser;
         $outputUser =  $row['userName'];
         $outputPicURL = $row['picURL'];
-        $outputTime = date('Y-m-d H:i',  $row['time']); 
+        $pos = strpos($outputPicURL, '/', 4);
+        $thumbURL = substr_replace($outputPicURL, '/thumb', $pos, 1);
+        $outputTime = $row['time']; 
+        $outputTime = strtotime($outputTime);
+        $outputTime = date('Y-m-d H:i', $outputTime);
         $outputString = $row['description'];    
         $outputPicID = $row['pictureID'];   
         $outputXML.= "<picture>";
         $outputXML.= "
                     <picuser>$outputUser</picuser>
-                    <picurl>$outputPicURL</picurl> 
+                    <picurl>$thumbURL</picurl> 
                     <pictime>$outputTime</pictime>
-                    <picid>$outputPicID</picid>
-                    <comment>
-                        <commenttime>hej</commenttime>
-                        <commentuser>are</commentuser>
-                        <commenttext>eesadasdasds</commenttext>
-                    </comment>
-                <description>
-                    Lorem ipsum
-                </description>  
+                    <picid>$outputPicID</picid> 
            ";
         $outputXML .= "</picture>";
      }

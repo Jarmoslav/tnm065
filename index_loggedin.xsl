@@ -9,7 +9,7 @@
 				<header>
 					<div id = "headerContent">
 						<a href = "index.php" id = "heading"><h1>LiU-Gram</h1></a>
-						<input type="text" class="search" id="searchbox" value = "Search..."/>
+						<input type="text" class="search" id="searchbox" placeholder = "Search..."/>
 						<a id = "uploadlink" href = "uploadImage.php"> Upload Image! </a>
 						<a id = "signoutlink" href = "logout.php"> Logout </a>
 						<p class = "loggedinas">Logged in as <a class = "userlink" href = "userProfile.php"><xsl:value-of select = "username"/></a></p>
