@@ -17,27 +17,24 @@ $(document).ready(function() {
 				url : "search.php",
 				data : dataString,
 				dataType : "xml",
-				async: false,
 				cache : false,
 				success : function(data, textStatus, jqXHR) {
                     //Data repsonse from server
                     $("#mainFeed").html('');
                     var htmlString = '';
-                    console.log(data);
+                    
                     var pictureNumbers = data.getElementsByTagName("picture");
-                    var pictureNumber, i;
-                    console.log(pictureNumbers);
-
-					//get the xml info via javasqript
-					for(i = 0; i < pictureNumbers.length; i++){
-                       
+                    var pictureNumber,
+                         i=0;
+                    //Since the inversed does not matter, we can iterate backwards.	
+					for (i = pictureNumbers.length - 1; i >= 0; i -= 1) {
                         pictureNumber = pictureNumbers[i];
-                        data = pictureNumber;
-						var picUrl = $(data).find('picurl').text();
-						var picUser = $(data).find('picuser').text();
-						var picTime = $(data).find('pictime').text();
-						var picID = $(data).find('picid').text();
-						
+                  
+						var picUrl = $(pictureNumber).find('picurl').text();
+						var picUser = $(pictureNumber).find('picuser').text();
+						var picTime = $(pictureNumber).find('pictime').text();
+						var picID = $(pictureNumber).find('picid').text();
+		
 						htmlString += '<div class = "photoFrame">';
 						htmlString += '<a href ="viewImage.php?pictureID=' + picID + '"><img height = "120" src =' + picUrl + ' alt = "test"/></a>';
 						htmlString += '<p class = "username">Uploaded by:' + picUser + '</p>';
@@ -46,7 +43,6 @@ $(document).ready(function() {
 					}
 					//set the values into the DOM
 					$("#mainFeed").append(htmlString);
-					
 				},
 			    error: function (jqXHR, textStatus, errorThrown)
 			    {
