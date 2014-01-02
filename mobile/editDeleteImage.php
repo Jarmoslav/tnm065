@@ -84,16 +84,21 @@
 							$getFilePath->execute(array('PID'=>$pictureID, 'USER'=>$userName));
 
 							$filePath = $getFilePath->fetch();
-							$theFilePath = $filePath['picURL'];
+							$tempFilePath = $filePath['picURL'];
 
 							$deleteImage = $dbh->prepare('DELETE FROM picture WHERE pictureID = :PID AND userName = :USER');
 							$deleteImage->execute(array('PID'=>$pictureID, 'USER'=>$userName));
 
+							$theFilePath = "../";
+							$theFilePath .= $tempFilePath;
+
 							unlink($theFilePath);
-							$pos = strpos($theFilePath, '/', 4);
-							$thumbURL = substr_replace($theFilePath, '/thumb', $pos, 1);
+							$pos = strpos($tempFilePath, '/', 4);
+							$thumbURL = "../";
+							$tempThumbURL = substr_replace($tempFilePath, '/thumb', $pos, 1);
+							$thumbURL .= $tempThumbURL;
 							unlink($thumbURL);
-							echo "Image is deleted!";
+							echo "<p> Image is deleted! </p>";
 						}
 					?>
 				</div>

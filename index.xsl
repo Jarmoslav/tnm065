@@ -7,8 +7,7 @@
 				<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 				<!-- stylesheets-->
 				<link rel="stylesheet" type="text/css" media="screen" href="liugram.css"/>
-			
-
+				
 			</head>
 			<body>
 				<header>

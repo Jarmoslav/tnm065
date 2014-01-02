@@ -412,3 +412,14 @@ textarea
 	position: relative;
 	padding: 8px 14px 9px;
 }
+
+#imageUploader
+{
+	margin-top: 50px;
+	text-align: center;
+}
+
+#imageuploader label
+{
+	font-size: 2.0em;
+}

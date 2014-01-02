@@ -11,7 +11,7 @@
 <html>
 	<head>
 		<title>LiU-Gram - View Image</title>
-		<link rel="stylesheet" type="text/css" media="screen" href="liugram.css"/>
+		<link rel="stylesheet" type="text/css" media="screen" href="mobile.css"/>
 	</head>
 	<body>
 		<header>
@@ -30,8 +30,8 @@
 				<h2> Upload an Image! </h2>
 				<form action = "" method = "post"  enctype="multipart/form-data" id = "imageUploader">
 					<ul id ="commentlist">						
-						<li><label for="file">Choose an image: </label><input type="file" name="file" id="file"/></li>
-						<li><textarea name = "description" cols ="70" rows = "10">Description... </textarea></li>
+						<li><label for="file">Choose an image: </label><input type="file" name="file" id="mobileFile"/></li>
+						<li><textarea name = "description" cols ="40" rows = "10">Description... </textarea></li>
 						<li><input class = "button" type="submit" name="publiceraNyhet" value="Upload!"/></li> 
 					</ul>
 				</form>
