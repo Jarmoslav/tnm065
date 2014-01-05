@@ -20,6 +20,7 @@
 	  echo '<?xml version="1.0" standalone="no"?>';
 	  echo '<!DOCTYPE liugram SYSTEM "http://www.student.itn.liu.se/~johho982/TNM065/ProjektGrejer/liugram.dtd">';
 	  include 'prefix.php';
+	  echo '<?xml-stylesheet type="text/xsl" href="postfixEditDeleteImage.xsl"?>';
 
 	  //xsl-stylesheet
 ?>
@@ -27,7 +28,7 @@
 <liugram>
 	<?php 
 
-		echo '<?xml-stylesheet type="text/xsl" href="postfixEditDeleteImage.xsl"?>';
+		
 		echo "<username>$userName</username>";
 
 		include "dbconnect.inc.php";

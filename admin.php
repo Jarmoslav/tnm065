@@ -10,37 +10,69 @@
 	//include('dbconnect.inc.php');
 ?>
 
-<html>
-	<head>
-		<title>LiU-Gram - Admin</title>
-		<link rel="stylesheet" type="text/css" media="screen" href="liugram.css"/>
-	</head>
-	<body>
-		<header>
-			<div id = "headerContent">
-				<a href = "index.php" id = "heading"><h1>LiU-Gram</h1></a>
-				<a href = "logout.php" id = "signoutlink" style = "margin-left: 400px;"> Logout</a>
-			</div>
-		</header>
+<?php
 
-		<div id ="pagewrapper">
-			<h2> Welcome Administrator! </h2>
-			<p> Users in the system sorted alphabetically: </p>
-			<?php
-				include "dbconnect.inc.php";
-				$stmt = $dbh->prepare('SELECT userName FROM user');
-				$stmt->execute();
+	 //header("Content-type:text/xml;charset=utf-8");
+	  echo '<?xml version="1.0" standalone="no"?>';
+	  echo '<!DOCTYPE liugram SYSTEM "http://www.student.itn.liu.se/~johho982/TNM065/ProjektGrejer/liugram.dtd">';
+	  include 'prefix.php';
+	  echo '<?xml-stylesheet type="text/xsl" href="admin.xsl"?>';
+?>
 
-				$result = $stmt->fetchAll();
-				foreach($result as $r)
+<liugram>
+	<?php 
+		include "dbconnect.inc.php";
+		$stmt = $dbh->prepare('SELECT * FROM user ORDER BY userName ASC');
+		$stmt->execute();
+
+		$result = $stmt->fetchAll();
+		foreach ($result as $r) 
+		{
+			$picUser = $r['userName'];
+				$picURL = $r['picURL'];
+				$picTime = $r['time'];
+				$picTime = strtotime($picTime);
+				$picTime = date('Y-m-d H:i', $picTime);
+				$picID = $r['pictureID'];
+				$description = $r['description'];
+				//$pos = strpos($picURL, '/', 4);
+				//$thumbURL = substr_replace($picURL, '/thumb', $pos, 1);
+
+				//Statement for comments on pictures.
+
+				echo "<picture>
+							<picuser>$picUser</picuser>
+							<picurl>$picURL</picurl> 
+							<pictime>$picTime</pictime>
+							<picid>$picID</picid>";
+
+
+				//Sorry för dåligt varibelnamn :D
+				$stmt2 = $dbh->prepare('SELECT * FROM comment WHERE pictureID = :PID ORDER BY time DESC');
+				$stmt2->execute(array('PID' => $picID));
+				$result2 = $stmt2->fetchAll();
+
+				//The comment element looks like: ELEMENT comment (commenttime, commentuser, commenttext)
+				foreach($result2 as $r2)
 				{
-					$user = $r['userName'];
+					$commentText = $r2['text'];
+					$commentUser = $r2['userName'];
+					$commentTime = $r2['time'];
+					$commentTime = strtotime($commentTime);
+					$commentTime = date('Y-m-d H:i', $commentTime);
 
-					echo "<a class = 'usersAdmin' href = manageUsers.php?userName=$user> $user </a>";
+					echo "<comment>
+							<commenttime>$commentTime</commenttime>
+							<commentuser>$commentUser</commentuser>
+							<commenttext>$commentText</commenttext>
+						</comment>";
 				}
-			?>
 
-		</div>
-
-	</body>
-</html>
+				echo "<description>$description</description>";
+				echo "</picture>";
+		}
+	?>	
+</liugram>
+<?php
+	include 'posfixAdmin.php';
+?>

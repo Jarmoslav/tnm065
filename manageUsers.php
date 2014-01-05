@@ -1,11 +1,4 @@
 <?php
-	require_once "Mobile_Detect.php";
-	  $detect = new Mobile_Detect;
-
-	  if($detect->isMobile())
-	  {
-	  	header("Location: mobile/viewImage.php");
-	  } 
 	//session för att kolla att  man bara kan komma åt sidan då man är inloggad	
 	session_start();
 	
@@ -18,100 +11,81 @@
 	//include('dbconnect.inc.php');
 ?>
 
-<html>
-	<head>
-		<title>LiU-Gram - Admin</title>
-		<link rel="stylesheet" type="text/css" media="screen" href="liugram.css"/>
-	</head>
-	<body>
-		<header>
-			<div id = "headerContent">
-				<a href = "index.php" id = "heading"><h1>LiU-Gram</h1></a>
-				<a href = "logout.php" id = "signoutlink" style = "margin-left: 400px;"> Logout</a>
-			</div>
-		</header>
+<?php 	  
+	  //header("Content-type:text/xml;charset=utf-8");
+	  echo '<?xml version="1.0" standalone="no"?>';
+	  echo '<!DOCTYPE liugram SYSTEM "http://www.student.itn.liu.se/~johho982/TNM065/ProjektGrejer/liugram.dtd">';
+	  include 'prefix.php';
+	  echo '<?xml-stylesheet type="text/xsl" href="managUsers.xsl"?>';
 
-		<div id ="pagewrapper">
-			<h2 style = "margin-bottom: 15px;"> Administrate user <?php echo "$adminUser <a class = 'edit' href = 'adminDelete.php?contentType=user&content=$adminUser'> Delete User </a>"; ?> </h2>
-			
-			<div id = "adminImages">
-				<p style = "text-align: center;"> Images uploaded: </p>
-				<?php 
-					include "dbconnect.inc.php";
+	  //xsl-stylesheet
+?>
+<liugram>
 
-					$stmt = $dbh->prepare('SELECT * FROM picture WHERE userName = :USER ORDER BY time DESC');
-					$stmt->execute(array('USER'=>$adminUser));
+<?php
+	
+	echo "<username>$adminUser</username>";
 
-					$result = $stmt->fetchALL();
+	include "dbconnect.inc.php";
 
-					foreach($result as $r)
-					{
-						$picURL = $r['picURL'];
-						$picTime = $r['time'];
-						$picTime = strtotime($picTime);
-						$picTime = date('Y-m-d H:i', $picTime);
-						$picID = $r['pictureID'];
-						$description = $r['description'];
-						//Position where the second slash is.
-						$pos = strpos($picURL, '/', 4);
-						$thumbURL = substr_replace($picURL, '/thumb', $pos, 1);
+	$stmt = $dbh->prepare('SELECT * FROM picture ORDER BY time DESC');
+	$stmt->execute();
+
+	$result = $stmt->fetchAll();
+
+	foreach ($result as $r) 
+	{
+		$picUser = $r['userName'];
+			$picURL = $r['picURL'];
+			$picTime = $r['time'];
+			$picTime = strtotime($picTime);
+			$picTime = date('Y-m-d H:i', $picTime);
+			$picID = $r['pictureID'];
+			$description = $r['description'];
+			$pos = strpos($picURL, '/', 4);
+			$thumbURL = substr_replace($picURL, '/thumb', $pos, 1);
+
+			//Statement for comments on pictures.
+
+			echo "<picture>
+						<picuser>$picUser</picuser>
+						<picurl>$thumbURL</picurl> 
+						<pictime>$picTime</pictime>
+						<picid>$picID</picid>";
 
 
+			//Sorry för dåligt varibelnamn :D
+			$stmt2 = $dbh->prepare('SELECT * FROM comment WHERE pictureID = :PID ORDER BY time DESC');
+			$stmt2->execute(array('PID'=>$picID));
+			$result2 = $stmt2->fetchAll();
 
-						echo "<div class = 'photoFrame'>
-								<img src = '$thumbURL' height = '100'/>
-								<p class = 'pictime'>$picTime</p>
-								<a class = 'edit' href = 'adminDelete.php?contentType=image&content=$picID&user=$adminUser'> Delete Image</a>								
-							  </div>";
-					} 
-				?>
-			</div>
+			//The comment element looks like: ELEMENT comment (commenttime, commentuser, commenttext)
+			foreach($result2 as $r2)
+			{
+				$commentText = $r2['text'];
+				$commentUser = $r2['userName'];
+				$commentTime = $r2['time'];
+				$commentTime = strtotime($commentTime);
+				$commentTime = date('Y-m-d H:i', $commentTime);
+				$commentID = $r2['commentID'];
 
-			<div id = "adminComments">
-				<p style = "text-align: center;"> Comments posted: </p>
-				<?php
+				echo "<comment>
+						<commenttime>$commentTime</commenttime>
+						<commentuser>$commentUser</commentuser>
+						<commenttext>$commentText</commenttext>
+						<commentid>$commentID</commentid>
+					</comment>";
+			}
 
-					$stmt = $dbh->prepare('SELECT * FROM comment WHERE userName = :USER ORDER BY time DESC');
-					$stmt->execute(array('USER'=>$adminUser));
+			echo "<description>
+					$description
+				  </description>";
+			echo "</picture>";
+	}
 
-					$result = $stmt->fetchALL();
+?>
+</liugram>
 
-					foreach($result as $r)
-					{
-						$comment = $r['text'];
-						$picID = $r['pictureID'];
-						$time = $r['time'];
-						$time = strtotime($time);
-						$time = date('Y-m-d H:i', $time);
-						$commentID = $r['commentID'];
-
-						$stmt2 = $dbh->prepare('SELECT picURL FROM picture WHERE pictureID = :PID');
-						$stmt2->execute(array('PID'=>$picID));
-
-						$result2 = $stmt2->fetchALL();
-
-						echo "<p style = 'padding-top: 10px;border-top: 1px solid #DDD;'> $comment </p>";
-						echo "<p class = 'commentTime'> $time </p>";
-						echo "<p> On image:  </p>";
-
-						foreach($result2 as $r2)
-						{
-							$picURL = $r2['picURL'];
-							$pos = strpos($picURL, '/', 4);
-							$thumbURL = substr_replace($picURL, '/thumb', $pos, 1);
-
-							echo "<div class = 'photoFrame'>
-									<img src = '$thumbURL' height = '100' />
-								  </div>";
-
-							echo "<a class = 'edit' href = 'adminDelete.php?contentType=comment&content=$commentID&user=$adminUser'> Delete Comment</a>";
-						}
-					}
-				?>
-			</div>
-
-		</div>
-
-	</body>
-</html>
-
+<?php
+	include "postfixManageUsers.php";
+?>
