@@ -15,95 +15,114 @@
 	$userName = $_SESSION['user'];
 ?>
 
-<html>
-	<head>
-		<title><?php echo "$userName"?> - Edit</title>
-		<link rel="stylesheet" type="text/css" media="screen" href="liugram.css"/>
-	</head>
-	<body>
-		<header>
-			<div id = "headerContent">
-				<a href = "index.php" id = "heading"><h1>LiU-Gram</h1></a>
-				<a id = "uploadlink" href = 'index.php'>Back to Feed!</a>
-				<a id = "signoutlink" href = 'logout.php'>Sign out!</a>
-				<?php 					
-					echo "<p class = 'loggedinas'>Logged in as <a class = 'userlink' href = 'userProfile.php'>$userName</a></p>";
-				?>
-			</div>
+<?php 	  
+	  //header("Content-type:text/xml;charset=utf-8");
+	  echo '<?xml version="1.0" standalone="no"?>';
+	  echo '<!DOCTYPE liugram SYSTEM "http://www.student.itn.liu.se/~johho982/TNM065/ProjektGrejer/liugram.dtd">';
+	  include 'prefix.php';
 
-			</header>
+	  //xsl-stylesheet
+?>
 
-			<div id = "pagewrapper">
-				<h2> Edit or delete image.</h2>
+<liugram>
+	<?php 
 
-				<div id = "editdescr">
-					<?php 
-						include "dbconnect.inc.php";
-						$pictureID = $_GET['pictureID'];
+		echo '<?xml-stylesheet type="text/xsl" href="postfixEditDeleteImage.xsl"?>';
+		echo "<username>$userName</username>";
 
-						$stmt = $dbh->prepare('SELECT * FROM picture WHERE userName = :USER AND pictureID = :PID ORDER BY time DESC');
-						$stmt->execute(array('USER'=>$userName, 'PID'=>$pictureID));
+		include "dbconnect.inc.php";
+		$pictureID = $_GET['pictureID'];
 
-						$result = $stmt->fetchAll();
-						foreach($result as $r)
-						{
-							$picTime = $r['time'];
-							$picTime = strtotime($picTime);
-							$picTime = date('Y-m-d H:i', $picTime);
-							$description = $r['description'];
-							$picURL = $r['picURL'];
-							$pos = strpos($picURL, '/', 4);
-							$thumbURL = substr_replace($picURL, '/thumb', $pos, 1);
+		$stmt = $dbh->prepare('SELECT * FROM picture WHERE userName = :USER AND pictureID = :PID ORDER BY time DESC');
+		$stmt->execute(array('USER'=>$userName, 'PID'=>$pictureID));
 
-							echo "<div class = 'photoFrame'>
-								  	<img height = '160' src = '$thumbURL' alt = 'test' />
-								  	<form method = 'post' action = '' id = 'editForm'>
-								  		<ul id = 'commentlist'>
-											<li><textarea name = 'newDescr' cols = '40' rows = '5'>$description</textarea></li>
-											<li><input class = 'button' name = 'editDescr' type = 'submit' value = 'Edit Description'/></li>
-										</ul>
-								  	</form>";
+		$result = $stmt->fetchAll();
+		foreach ($result as $r) 
+		{
+			$picUser = $r['userName'];
+				$picURL = $r['picURL'];
+				$picTime = $r['time'];
+				$picTime = strtotime($picTime);
+				$picTime = date('Y-m-d H:i', $picTime);
+				$picID = $r['pictureID'];
+				$description = $r['description'];
+				//$pos = strpos($picURL, '/', 4);
+				//$thumbURL = substr_replace($picURL, '/thumb', $pos, 1);
 
-							if(isset($_POST['editDescr']))
-							{
+				//Statement for comments on pictures.
 
-								$newDescr = $_POST['newDescr'];
+				echo "<picture>
+							<picuser>$picUser</picuser>
+							<picurl>$picURL</picurl> 
+							<pictime>$picTime</pictime>
+							<picid>$picID</picid>";
 
-								if(!empty($newDescr))
-								{
-									$update = $dbh->prepare('UPDATE picture SET description = :DESCR WHERE userName = :USER AND pictureID = :PID');
-									$update->execute(array('DESCR'=>$newDescr, 'USER'=>$userName, 'PID'=>$pictureID));
-									echo "Description has been edited!";
-								}								
-							}
-							echo "</div>";
-						}
-					?>
 
-					<button id = 'delete' form= "editForm"name = 'deleteButton' formmethod = 'POST' type = 'submit'> Delete Image </button>
+				//Sorry för dåligt varibelnamn :D
+				$stmt2 = $dbh->prepare('SELECT * FROM comment WHERE pictureID = :PID ORDER BY time DESC');
+				$stmt2->execute(array('PID' => $picID));
+				$result2 = $stmt2->fetchAll();
 
-					<?php
-						if(isset($_POST['deleteButton']))
-						{
-							$getFilePath = $dbh->prepare('SELECT picURL FROM picture WHERE pictureID = :PID AND userName = :USER');
-							$getFilePath->execute(array('PID'=>$pictureID, 'USER'=>$userName));
+				//The comment element looks like: ELEMENT comment (commenttime, commentuser, commenttext)
+				foreach($result2 as $r2)
+				{
+					$commentText = $r2['text'];
+					$commentUser = $r2['userName'];
+					$commentTime = $r2['time'];
+					$commentTime = strtotime($commentTime);
+					$commentTime = date('Y-m-d H:i', $commentTime);
 
-							$filePath = $getFilePath->fetch();
-							$theFilePath = $filePath['picURL'];
+					echo "<comment>
+							<commenttime>$commentTime</commenttime>
+							<commentuser>$commentUser</commentuser>
+							<commenttext>$commentText</commenttext>
+						</comment>";
+				}
 
-							$deleteImage = $dbh->prepare('DELETE FROM picture WHERE pictureID = :PID AND userName = :USER');
-							$deleteImage->execute(array('PID'=>$pictureID, 'USER'=>$userName));
+				echo "<description>$description</description>";
+				echo "</picture>";
+		}
+	?>	
+</liugram>
 
-							unlink($theFilePath);
-							$pos = strpos($theFilePath, '/', 4);
-							$thumbURL = substr_replace($theFilePath, '/thumb', $pos, 1);
-							unlink($thumbURL);
-							echo "Image is deleted!";
-						}
-					?>
-				</div>
+<?php
+	//Scripts for editing.
+	if(isset($_POST['editDescr']))
+	{
+		$newDescr = $_POST['newDescr'];
 
-			</div>
+		if(!empty($newDescr))
+		{
+			$update = $dbh->prepare('UPDATE picture SET description = :DESCR WHERE userName = :USER AND pictureID = :PID');
+			$update->execute(array('DESCR'=>$newDescr, 'USER'=>$userName, 'PID'=>$pictureID));
 
-	</body>
-</html>
+
+		}								
+	}
+
+	if(isset($_POST['deleteButton']))
+	{
+		$getFilePath = $dbh->prepare('SELECT picURL FROM picture WHERE pictureID = :PID AND userName = :USER');
+		$getFilePath->execute(array('PID'=>$pictureID, 'USER'=>$userName));
+
+		$filePath = $getFilePath->fetch();
+		$theFilePath = $filePath['picURL'];
+
+		$deleteImage = $dbh->prepare('DELETE FROM picture WHERE pictureID = :PID AND userName = :USER');
+		$deleteImage->execute(array('PID'=>$pictureID, 'USER'=>$userName));
+
+		unlink($theFilePath);
+		$pos = strpos($theFilePath, '/', 4);
+		$thumbURL = substr_replace($theFilePath, '/thumb', $pos, 1);
+		unlink($thumbURL);
+	}
+
+?>
+
+<?php
+	if($_SESSION['loggedin'] == true && $_SESSION['user'] != "")
+	{
+		include "postfixEditDeleteImage.php";
+	}
+
+?>

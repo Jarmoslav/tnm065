@@ -508,7 +508,6 @@ overflow:hidden;
 #delete
 {
 	cursor: pointer;
-	margin-left: 50px;
 	color: white;
 	border: none;
 	background: #CC3333 url("miscimg/alert-overlay.png") repeat-x;
