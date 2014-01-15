@@ -3,38 +3,13 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 11, 2013 at 11:22 AM
+-- Generation Time: Jan 15, 2014 at 06:01 PM
 -- Server version: 5.5.33
 -- PHP Version: 5.5.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
---
--- Database: `Posts`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `newsPosts`
---
-
-CREATE TABLE `newsPosts` (
-  `Title` varchar(100) NOT NULL,
-  `Text` text NOT NULL,
-  `Date` datetime NOT NULL,
-  `ImageURL` varchar(100) NOT NULL,
-  PRIMARY KEY (`Date`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `newsPosts`
---
-
-INSERT INTO `newsPosts` (`Title`, `Text`, `Date`, `ImageURL`) VALUES
-('From DataBase!', 'This is actually from a SQL-Database locally on my machine!', '2013-11-26 21:38:00', 'noImage'),
-('Another Post!', 'Now I have two posts. Let''s see if they are actually displayed! It is fun coding websites. Did I mention that the database connection is made with PDO? Hello hello my name is John. Tomorrow I will work with the Software Engineering Project all day! Whoo!', '2013-11-26 22:14:23', 'noImage');
 --
 -- Database: `TNM065`
 --
@@ -54,7 +29,7 @@ CREATE TABLE `comment` (
   PRIMARY KEY (`commentID`,`pictureID`),
   KEY `userName` (`userName`),
   KEY `pictureID` (`pictureID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
 
 --
 -- Dumping data for table `comment`
@@ -67,10 +42,15 @@ INSERT INTO `comment` (`commentID`, `pictureID`, `userName`, `text`, `time`) VAL
 (4, 1, 'user2', 'I really like you comment actually!', '2013-11-30 15:54:09'),
 (5, 1, 'user2', 'I really like you comment actually!', '2013-11-30 15:55:22'),
 (6, 1, 'user2', 'This picture is colorful!', '2013-11-30 15:56:35'),
-(9, 6, 'hollenjohn', 'Nice! Using this as wallpaper!', '2013-12-03 22:41:45'),
 (10, 8, 'hollenjohn', 'Nice, found this on my android aswell!', '2013-12-03 22:42:18'),
 (11, 2, 'hollenjohn', 'Nice! Where is this taken?', '2013-12-10 19:50:07'),
-(12, 1, 'hollenjohn', 'This one is nice!', '2013-12-10 22:22:43');
+(12, 1, 'hollenjohn', 'This one is nice!', '2013-12-10 22:22:43'),
+(13, 16, 'hollenjohn', 'I like this image!', '2013-12-11 17:19:54'),
+(14, 12, 'simonjare', 'Nice! I really like Rayman!', '2013-12-17 21:09:33'),
+(16, 11, 'hollenjohn', 'This is really beautiful!', '2013-12-19 20:24:04'),
+(18, 1, 'hollenjohn', 'Test', '2013-12-29 14:05:47'),
+(21, 8, 'simonjare', 'What are you talking about? This is your image dude!', '2014-01-05 21:51:22'),
+(22, 19, 'user1', 'Cool. I like apple computers!', '2014-01-12 11:20:07');
 
 -- --------------------------------------------------------
 
@@ -87,7 +67,7 @@ CREATE TABLE `picture` (
   PRIMARY KEY (`pictureID`,`userName`),
   KEY `userName` (`userName`),
   KEY `pictureID` (`pictureID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
 
 --
 -- Dumping data for table `picture`
@@ -96,14 +76,16 @@ CREATE TABLE `picture` (
 INSERT INTO `picture` (`pictureID`, `userName`, `picURL`, `time`, `description`) VALUES
 (1, 'user1', 'img/user1/testImage.JPG', '2013-11-27 20:55:00', 'This is a testImage to have something to test with.'),
 (2, 'user2', 'img/user2/testImage2.jpg', '2013-11-28 08:33:00', 'This is an image of a lighthouse in the sunset.'),
-(6, 'user2', 'img/user2/mountainLionGalaxyMod2.png', '2013-12-01 21:07:17', 'An alternative version to the galaxy found in Apple OS X Mountain Lion.'),
 (7, 'hollenjohn', 'img/hollenjohn/03390_whalebeachpartii_1440x900.jpg', '2013-12-02 11:12:43', 'First post! A very nice picture of a beach in the sunset!'),
 (8, 'hollenjohn', 'img/hollenjohn/wallpaper_51.jpg', '2013-12-02 11:14:50', 'A very nice image of some mountain. Found in Android 4.4 kitkat. '),
-(10, 'hollenjohn', 'img/hollenjohn/wallpaper-859225.jpg', '2013-12-03 22:03:19', 'A clean, minimalistic abstract image. Perfect as a desktop wallpaper. Blue and Black.'),
 (11, 'hollenjohn', 'img/hollenjohn/03422_standingontheedgeofinfinity_1440x900.jpg', '2013-12-06 10:53:57', 'Image of a forest in the fog. And the fog is nice.'),
 (12, 'user1', 'img/user1/raymanlegends.jpg', '2013-12-10 22:25:19', 'This is an image of Rayman from the newest game, Rayman Legends.'),
 (14, 'user1', 'img/user1/wallpaper-173958.jpg', '2013-12-10 22:31:16', 'A cat trying to not fall down the edge of the screen.'),
-(15, 'simonjare', 'img/simonjare/hazyFieldliten.jpg', '2013-12-10 22:33:41', 'Image of a farm in GothenBourg where I live.');
+(15, 'simonjare', 'img/simonjare/hazyFieldliten.jpg', '2013-12-10 22:33:41', 'Image of a farm in GothenBourg where I live.'),
+(16, 'hollenjohn', 'img/hollenjohn/delusion14402.png', '2013-12-11 17:18:20', 'Abstract image of something. '),
+(18, 'simonjare', 'img/simonjare/GalaxyMountainLionBrighterjpeg.jpg', '2013-12-19 11:28:47', 'The galaxy found in OS X Mountain Lion. A really cool image actually!'),
+(19, 'hollenjohn', 'img/hollenjohn/W8IdvVk.jpg', '2014-01-12 11:17:42', 'The new wallpaper in OS X Mavericks!'),
+(21, 'simonjare', 'img/simonjare/7174569831_11b50c5012_k.jpg', '2014-01-12 11:21:48', 'A nice closeup of some grass.');
 
 -- --------------------------------------------------------
 
@@ -122,6 +104,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`userName`, `password`) VALUES
+('Hej', '541c57960bb997942655d14e3b9607f9'),
 ('hollenjohn', '1943b8b39ca8df2919faff021e0aca98'),
 ('simonjare', '1943b8b39ca8df2919faff021e0aca98'),
 ('user1', '5f4dcc3b5aa765d61d8327deb882cf99'),
